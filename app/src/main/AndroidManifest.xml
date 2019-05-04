@@ -16,10 +16,13 @@
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.android.deskclock.ALARM_DISMISS" />
+                <action android:name="com.android.deskclock.ALARM_DONE" />
+                <action android:name="com.lge.clock.alarmalert.stop" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

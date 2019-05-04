@@ -1,5 +1,6 @@
 package com.example.myapplication3.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
@@ -44,15 +45,17 @@ public class AddAlarmActivity extends AppCompatActivity {
         btnAddAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddAlarmActivity.this,MainActivity.class);
+
                 hour = timePicker.getHour();
                 minute = timePicker.getMinute();
 
+                Intent intent = new Intent(AddAlarmActivity.this,MainActivity.class);
                 intent.putExtra("hour",hour);
                 intent.putExtra("minute",minute);
                 intent.putExtra("title",title.getText().toString());
-                AddAlarmActivity.this.startActivity(intent);
 
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }

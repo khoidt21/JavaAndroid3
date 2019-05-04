@@ -1,7 +1,9 @@
 package com.example.myapplication3.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import model.Alarm;
 
 public class MainActivity extends AppCompatActivity{
 
+    private static final int REQUEST_CODE = 0 ;
     Toolbar toolbar;
     RecyclerView recyclerView;
     ArrayList<Alarm> listAlram = new ArrayList<>();
@@ -77,8 +80,9 @@ public class MainActivity extends AppCompatActivity{
         int minute;
         String title;
 
-        title = data.getStringExtra("title");
-        System.out.println("=============" + title);
+
+                String resultString = data.getStringExtra("title");
+                System.out.println("===================" + resultString);
 
 
 
