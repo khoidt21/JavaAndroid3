@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity{
     Toolbar toolbar;
     RecyclerView recyclerView;
     ArrayList<Alarm> listAlram = new ArrayList<>();
-    Alarm alarm = new Alarm();
 
     public static final int REQUEST_ALARM = 2048;
 
@@ -80,14 +79,13 @@ public class MainActivity extends AppCompatActivity{
                         Alarm alarmResult = (Alarm) getBundle.getSerializable("alarmresult");
 
                         System.out.println("============" +alarmResult);
-                        
+
                         // Setting up the RecyclerView
                         listAlram.add(alarmResult);
                         System.out.println("=============== +++++++++++++" + listAlram.size());
 
-                        assert recyclerView != null;
                         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                        ItemArrayAdapter adapter = new ItemArrayAdapter(listAlram);
+                        AlarmAdapter adapter = new AlarmAdapter(listAlram);
                         recyclerView.setAdapter(adapter);
                     }
                 }

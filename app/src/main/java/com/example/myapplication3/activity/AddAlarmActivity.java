@@ -52,6 +52,7 @@ public class AddAlarmActivity extends AppCompatActivity {
 
                 minute = timePicker.getCurrentMinute();
 
+
                 Alarm alarm = new Alarm();
                 alarm.setHour(hour);
                 alarm.setMinute(minute);
