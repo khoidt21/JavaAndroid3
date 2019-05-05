@@ -32,12 +32,12 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<ItemArrayAdapter.Exam
 
     public class ExampleViewHolder extends RecyclerView.ViewHolder {
 
-        TextView text1, text2;
+        TextView tvHour,tvTitle ;
 
         ExampleViewHolder(View itemView) {
             super(itemView);
-            text1 = (TextView) itemView.findViewById(R.id.txtHour);
-            text2 = (TextView) itemView.findViewById(R.id.txtEvent);
+            tvHour = (TextView) itemView.findViewById(R.id.txtHour);
+            tvTitle = (TextView) itemView.findViewById(R.id.editTitle);
         }
     }
 
@@ -66,10 +66,11 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<ItemArrayAdapter.Exam
         int hour = object.getHour();
         System.out.println(hour+"---------------------------------");
         int minute = object.getMinute();
+        String title = object.getTitle();
 
-        
-        holder.text1.setText(hour);
-        holder.text2.setText(minute);
+
+        holder.tvHour.setText(hour);
+        holder.tvTitle.setText(title);
     }
 
     @Override

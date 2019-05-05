@@ -80,27 +80,15 @@ public class MainActivity extends AppCompatActivity{
                         Alarm alarmResult = (Alarm) getBundle.getSerializable("alarmresult");
 
                         System.out.println("============" +alarmResult);
-
-
+                        
                         // Setting up the RecyclerView
                         listAlram.add(alarmResult);
                         System.out.println("=============== +++++++++++++" + listAlram.size());
 
                         assert recyclerView != null;
                         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-                        // Getting your ArrayList - this will be up to you
-                      //  ArrayList<Alarm> yourObjects = getMyObjects();
-
-
-                        // Standard RecyclerView implementation
-
                         ItemArrayAdapter adapter = new ItemArrayAdapter(listAlram);
                         recyclerView.setAdapter(adapter);
-
-                        //Toast.makeText(this, alarmResult.toString(), Toast.LENGTH_SHORT).show();
-                       // System.out.println("===================" + alarmResult.getHour());
-
                     }
                 }
             }
