@@ -21,6 +21,8 @@ import android.widget.TimePicker;
 import com.example.myapplication3.R;
 import java.util.ArrayList;
 
+import model.Alarm;
+
 public class AddAlarmActivity extends AppCompatActivity {
 
     TimePicker timePicker;
@@ -46,14 +48,19 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                hour = timePicker.getHour();
-                minute = timePicker.getMinute();
+                hour = timePicker.getCurrentHour();
+
+                minute = timePicker.getCurrentMinute();
+
+                Alarm alarm = new Alarm();
+                alarm.setHour(hour);
+                alarm.setMinute(minute);
+                alarm.setTitle(title.getText().toString());
 
                 Intent intent = new Intent(AddAlarmActivity.this,MainActivity.class);
-                intent.putExtra("hour",hour);
-                intent.putExtra("minute",minute);
-                intent.putExtra("title",title.getText().toString());
-
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("alarmresult",alarm);
+                intent.putExtras(bundle);
                 setResult(RESULT_OK, intent);
                 finish();
             }

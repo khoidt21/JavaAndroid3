@@ -1,6 +1,7 @@
 package com.example.myapplication3.activity;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.provider.ContactsContract;
@@ -14,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.example.myapplication3.R;
 import java.util.ArrayList;
 import model.Alarm;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity{
     ArrayList<Alarm> listAlram = new ArrayList<>();
     Alarm alarm = new Alarm();
 
+    public static final int REQUEST_ALARM = 2048;
 
     int hour;
     String title;
@@ -35,21 +39,12 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
 
-
-//        Intent intent = getIntent();
-//        title = intent.getStringExtra("title");
-//
-//
-//        //String lName = intent.getStringExtra("lastName");
-//
-//        System.out.println(title + "========================================");
-
         // set title cho action bar
         initView();
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Alarm");
 
-}
+    }
     public void initView(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
@@ -67,7 +62,7 @@ public class MainActivity extends AppCompatActivity{
         switch (item.getItemId()){
             case R.id.add_alarm :
                 Intent myIntent = new Intent(MainActivity.this, AddAlarmActivity.class);
-                MainActivity.this.startActivity(myIntent);
+                MainActivity.this.startActivityForResult(myIntent, REQUEST_ALARM);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -76,40 +71,42 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        int hour;
-        int minute;
-        String title;
+
+        if (requestCode == REQUEST_ALARM) {
+            if (resultCode == RESULT_OK) {
+                if (data != null) {
+                    Bundle getBundle = data.getExtras();
+                    if (getBundle != null) {
+                        Alarm alarmResult = (Alarm) getBundle.getSerializable("alarmresult");
+
+                        System.out.println("============" +alarmResult);
 
 
-                String resultString = data.getStringExtra("title");
-                System.out.println("===================" + resultString);
+                        // Setting up the RecyclerView
+                        listAlram.add(alarmResult);
+                        System.out.println("=============== +++++++++++++" + listAlram.size());
+
+                        assert recyclerView != null;
+                        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+                        // Getting your ArrayList - this will be up to you
+                      //  ArrayList<Alarm> yourObjects = getMyObjects();
 
 
+                        // Standard RecyclerView implementation
 
-//        if(bundle != null){
-//            hour = bundle.getInt("hour");
-//            minute = bundle.getInt("minute");
-//            title = bundle.getString("title");
-//
-//            System.out.println("================" +hour);
-//            System.out.println(minute);
-//
-//
-//            alarm.setHour(hour);
-//            alarm.setMinute(minute);
-//            alarm.setTitle(title);
-//            alarmList.add(alarm);
-//
-//            System.out.println("=============" + alarmList.size());
-//
-//            ItemArrayAdapter itemArrayAdapter = new ItemArrayAdapter(R.layout.alarm_item, alarmList);
-//            recyclerView = (RecyclerView) findViewById(R.id.recycler);
-//            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//            recyclerView.setItemAnimator(new DefaultItemAnimator());
-//            recyclerView.setAdapter(itemArrayAdapter);
+                        ItemArrayAdapter adapter = new ItemArrayAdapter(listAlram);
+                        recyclerView.setAdapter(adapter);
 
+                        //Toast.makeText(this, alarmResult.toString(), Toast.LENGTH_SHORT).show();
+                       // System.out.println("===================" + alarmResult.getHour());
 
+                    }
+                }
+            }
+        }
 
     }
+
 
 }

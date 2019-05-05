@@ -1,11 +1,13 @@
 package model;
 
-public class Alarm {
-   private int hour;
-   private int minute;
-   private String event;
-   private String title;
-   private boolean toggleOnOff = false;
+import java.io.Serializable;
+
+public class Alarm implements Serializable {
+    private int hour;
+    private int minute;
+    private String event;
+    private String title;
+    private boolean toggleOnOff = false;
 
     public String getTitle() {
         return title;
@@ -45,5 +47,16 @@ public class Alarm {
 
     public void setToggleOnOff(boolean toggleOnOff) {
         this.toggleOnOff = toggleOnOff;
+    }
+
+    @Override
+    public String toString() {
+        return "Alarm{" +
+                "hour=" + hour +
+                ", minute=" + minute +
+                ", event='" + event + '\'' +
+                ", title='" + title + '\'' +
+                ", toggleOnOff=" + toggleOnOff +
+                '}';
     }
 }
