@@ -26,7 +26,7 @@ import model.Alarm;
 public class AddAlarmActivity extends AppCompatActivity {
 
     TimePicker timePicker;
-    EditText title;
+    EditText event;
     Button btnAddAlarm;
     int hour;
     int minute;
@@ -42,7 +42,7 @@ public class AddAlarmActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Alarm");
         btnAddAlarm = (Button) findViewById(R.id.btnAddAlarm);
         timePicker = (TimePicker) findViewById(R.id.timePicker);
-        title = (EditText) findViewById(R.id.editTitle);
+        event = (EditText) findViewById(R.id.editEvent);
 
         btnAddAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +56,7 @@ public class AddAlarmActivity extends AppCompatActivity {
                 Alarm alarm = new Alarm();
                 alarm.setHour(hour);
                 alarm.setMinute(minute);
-                alarm.setTitle(title.getText().toString());
+                alarm.setEvent(event.getText().toString());
 
                 Intent intent = new Intent(AddAlarmActivity.this,MainActivity.class);
                 Bundle bundle = new Bundle();
