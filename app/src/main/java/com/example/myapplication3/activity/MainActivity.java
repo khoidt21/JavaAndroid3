@@ -1,36 +1,28 @@
 package com.example.myapplication3.activity;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlarmManager;
-import android.content.ClipData;
+import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Typeface;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.myapplication3.R;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import model.Alarm;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements AlarmListener{
 
     private static final int REQUEST_CODE = 0 ;
     Toolbar toolbar;
@@ -56,15 +48,12 @@ public class MainActivity extends AppCompatActivity{
     public void initView(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
-        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getResources()));
+
+        // xu ly border recyclerView
+        recyclerView.addItemDecoration(new DividerItemDecoration(getResources()));
 
         // khoi tao alarmManager
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        Intent intent = new Intent(MainActivity.this,AlarmReceiver.class);
-
-
-        // lay id button
-        toggleButton = (ToggleButton) findViewById(R.id.tglAlarm);
 
     }
 
@@ -98,17 +87,39 @@ public class MainActivity extends AppCompatActivity{
                         // lay duoc thong tin alarm
                         Alarm alarmResult = (Alarm) getBundle.getSerializable("alarmresult");
 
-                        // add thong tin cua alarm vao listAlram
+                        // add thong tin cua alarm vao listAlarm
                         listAlarm.add(alarmResult);
                         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                        AlarmAdapter adapter = new AlarmAdapter(listAlarm);
+                        AlarmAdapter adapter = new AlarmAdapter(listAlarm,this);
                         recyclerView.setAdapter(adapter);
                     }
                 }
             }
+
         }
 
     }
 
 
+    @Override
+    public void startAlarm(Alarm alarm, int requestCode) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, alarm.getHour());
+        calendar.set(Calendar.MINUTE, alarm.getMinute());
+        Intent intent_alarm_receiver = new Intent(MainActivity.this,AlarmReceiver.class);
+        intent_alarm_receiver.putExtra("music_flag",true);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,requestCode,intent_alarm_receiver,PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),10000,pendingIntent);
+
+    }
+
+    @Override
+    public void cancelAlarm(Alarm alarm, int requestCode) {
+        Intent intent_alarm_receiver = new Intent(MainActivity.this,AlarmReceiver.class);
+        intent_alarm_receiver.putExtra("music_flag",false);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,requestCode,intent_alarm_receiver,PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.cancel(pendingIntent);
+        sendBroadcast(intent_alarm_receiver);
+        Toast.makeText(this, "Alarm stopped!", Toast.LENGTH_SHORT).show();
+    }
 }

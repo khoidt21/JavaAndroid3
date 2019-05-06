@@ -7,9 +7,19 @@ import android.util.Log;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.e("Toi trong receiver","Xin chao");
+
+        Boolean check = intent.getExtras().getBoolean("music_flag");
+        if(check==true){
+            Intent intentMusic = new Intent(context,Music.class);
+            context.startService(intentMusic);
+        }else{
+            Intent intentMusic = new Intent(context,Music.class);
+            context.stopService(intentMusic);
+        }
+
         Intent myIntent = new Intent(context,Music.class);
         context.startService(intent);
     }
