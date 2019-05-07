@@ -10,6 +10,15 @@ import com.example.myapplication3.R;
 public class Music extends Service {
 
     MediaPlayer mediaPlayer;
+
+    public Music(){
+    }
+    public void stop() {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -17,16 +26,24 @@ public class Music extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        try{
+            MusicSongID musicSongID = new MusicSongID();
+            System.out.println("=====================++++++++++" + musicSongID.getSongID());
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.song1);
-        mediaPlayer.start();
+        mediaPlayer = MediaPlayer.create(this,R.raw.song4);
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    stop();
+                }
+            });
+
+            mediaPlayer.start();
+        return START_NOT_STICKY;
+        }catch (Exception ex){
+            System.out.println(ex.getStackTrace());
+        }
         return START_NOT_STICKY;
     }
-    
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mediaPlayer.stop();
-        mediaPlayer.reset();
-    }
+
 }

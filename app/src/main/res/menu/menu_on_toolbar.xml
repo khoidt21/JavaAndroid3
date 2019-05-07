@@ -4,10 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <item
+        android:id="@+id/add_setting"
+        android:orderInCategory="1"
+        android:title="Setting"
+        app:showAsAction="always"
+        />
+    <item
         android:id="@+id/add_alarm"
         android:icon="@drawable/add_icon"
         android:orderInCategory="1"
         android:title="Add"
         app:showAsAction="always" />
+
 
 </menu>

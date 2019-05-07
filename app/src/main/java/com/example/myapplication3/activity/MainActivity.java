@@ -12,14 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 import com.example.myapplication3.R;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.List;
 import model.Alarm;
 
 public class MainActivity extends AppCompatActivity implements AlarmListener{
@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
     Toolbar toolbar;
     RecyclerView recyclerView;
     ArrayList<Alarm> listAlarm = new ArrayList<>();
-    ToggleButton toggleButton;
-
     public static final int REQUEST_ALARM = 2048;
     AlarmManager alarmManager;
 
@@ -44,17 +42,17 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
         initView();
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(title);
+
+
     }
+
     public void initView(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
-
         // xu ly border recyclerView
         recyclerView.addItemDecoration(new DividerItemDecoration(getResources()));
-
         // khoi tao alarmManager
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-
     }
 
     @Override
@@ -69,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
             case R.id.add_alarm :
                 Intent myIntent = new Intent(MainActivity.this, AddAlarmActivity.class);
                 MainActivity.this.startActivityForResult(myIntent, REQUEST_ALARM);
+                break;
+            case R.id.add_setting:
+                Intent settingIntent = new Intent(MainActivity.this, SettingMusicActivity.class);
+                MainActivity.this.startActivityForResult(settingIntent,REQUEST_ALARM);
                 break;
 
         }
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
         Intent intent_alarm_receiver = new Intent(MainActivity.this,AlarmReceiver.class);
         intent_alarm_receiver.putExtra("music_flag",true);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,requestCode,intent_alarm_receiver,PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),10000,pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),500,pendingIntent);
 
     }
 
