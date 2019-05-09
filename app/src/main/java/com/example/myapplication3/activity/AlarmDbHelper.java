@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 import model.Alarm;
 
 public class AlarmDbHelper extends SQLiteOpenHelper {
@@ -58,7 +60,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         db.insert(TABLE_NAME,null,values);
         db.close();
     }
-    public Alarm getAlarms(){
+    public ArrayList<Alarm> getAlarms(){
 
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = new String[] { KEY_HOUR, KEY_MINUTE,KEY_AM_PM,KEY_EVENT,KEY_STATUS };
@@ -70,7 +72,8 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
                      //  cursor.getString(2),cursor.getString(3),
                 // cursor.getInt(4) > 0);
         //return alarm;
-        Alarm alarm = null;
+        ArrayList<Alarm> alarmList = new ArrayList<>();
+        Alarm alarm = new Alarm();
        if(cursor.moveToFirst()){
            do{
                int hour = cursor.getInt(0);
@@ -78,12 +81,19 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
                String ampm = cursor.getString(2);
                String event = cursor.getString(3);
                boolean status = cursor.getInt(4) > 0;
-               alarm = new Alarm(hour,minute,ampm,event,status);
+
+               alarm.setHour(hour);
+               alarm.setMinute(minute);
+               alarm.setAmpm(ampm);
+               alarm.setEvent(event);
+               alarm.setStatus(status);
+
+               alarmList.add(alarm);
+
            }while (cursor.moveToNext());
        }
-       return alarm;
+       return alarmList;
     }
-
 
 
 //    public void updateAlarm(Alarm alarm){

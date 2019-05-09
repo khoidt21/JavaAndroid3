@@ -30,11 +30,12 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
     ArrayList<Alarm> listAlarm = new ArrayList<>();
     public static final int REQUEST_ALARM = 2048;
     AlarmManager alarmManager;
+    AlarmAdapter alarmAdapter;
 
     int hour;
     String title = "Alarm";
 
-
+    AlarmDbHelper alarmDB = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(title);
 
+        alarmDB = new AlarmDbHelper(getApplicationContext());;
+
+        listAlarm = alarmDB.getAlarms();
+        setAlarmToAdapter();
 
     }
 
@@ -56,6 +61,13 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
         recyclerView.addItemDecoration(new DividerItemDecoration(getResources()));
         // khoi tao alarmManager
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+    }
+    public void setAlarmToAdapter(){
+        alarmAdapter = new AlarmAdapter(listAlarm,this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        AlarmAdapter adapter = new AlarmAdapter(listAlarm,this);
+        recyclerView.setAdapter(adapter);
+
     }
 
     @Override
@@ -97,21 +109,19 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
                         listAlarm.add(alarmResult);
 
                         // add thong tin cua alarm vao db sqlite
-                        final AlarmDbHelper alarmDB = new AlarmDbHelper(getApplicationContext());
+
                         Alarm alarm1 = new Alarm(alarmResult.getHour(),alarmResult.getMinute(),alarmResult.getAmpm(),
                                 alarmResult.getEvent(),alarmResult.isStatus());
                         alarmDB.addAlarm(alarm1);
 
-                        System.out.println("---------------------lay du lieu hour tu DB ra " + alarmDB.getAlarms().getHour());
-                        System.out.println("---------------------lay du lieu minute tu DB ra" + alarmDB.getAlarms().getMinute());
+                       // System.out.println("---------------------lay du lieu hour tu DB ra " + alarmDB.getAlarms().getHour());
+                        //System.out.println("---------------------lay du lieu minute tu DB ra" + alarmDB.getAlarms().getMinute());
 
 
                         // add thong tin cua alarm vao listAlarm
 
 
-                        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                        AlarmAdapter adapter = new AlarmAdapter(listAlarm,this);
-                        recyclerView.setAdapter(adapter);
+
                     }
                 }
             }

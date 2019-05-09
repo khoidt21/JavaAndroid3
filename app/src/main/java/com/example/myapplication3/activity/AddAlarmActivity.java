@@ -59,11 +59,11 @@ public class AddAlarmActivity extends AppCompatActivity {
 
                 alarm.setHour(hour);
                 alarm.setMinute(minute);
-
                 String am_pm = (hour < 12) ? "AM" : "PM";
                 alarm.setAmpm(am_pm);
-
                 alarm.setEvent(event.getText().toString());
+
+
 
                 Intent intent = new Intent(AddAlarmActivity.this,MainActivity.class);
                 Bundle bundle = new Bundle();
