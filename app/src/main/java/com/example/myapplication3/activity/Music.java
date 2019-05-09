@@ -26,21 +26,11 @@ public class Music extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        try{
-        int id = intent.getIntExtra("keyIDSong",0);
-        mediaPlayer = MediaPlayer.create(this,R.raw.song4);
-            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mediaPlayer) {
-                    stop();
-                }
-            });
+
+            mediaPlayer = MediaPlayer.create(this,R.raw.song4);
             mediaPlayer.start();
-        return START_NOT_STICKY;
-        }catch (Exception ex){
-            System.out.println(ex.getStackTrace());
-        }
-        return START_NOT_STICKY;
+            return START_NOT_STICKY;
+
     }
 
 }

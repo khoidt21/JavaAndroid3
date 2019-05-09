@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
                 Intent myIntent = new Intent(MainActivity.this, AddAlarmActivity.class);
                 MainActivity.this.startActivityForResult(myIntent, REQUEST_ALARM);
                 break;
+
+            // loi do case nay
             case R.id.add_setting:
                 Intent settingIntent = new Intent(MainActivity.this, SettingMusicActivity.class);
                 MainActivity.this.startActivityForResult(settingIntent,REQUEST_ALARM);
