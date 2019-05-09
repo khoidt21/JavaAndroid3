@@ -13,12 +13,7 @@ public class Music extends Service {
 
     MediaPlayer mediaPlayer;
 
-    public void stop() {
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
-    }
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -33,4 +28,10 @@ public class Music extends Service {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.stop();
+        mediaPlayer.start();
+    }
 }
