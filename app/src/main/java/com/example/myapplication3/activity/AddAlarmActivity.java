@@ -31,6 +31,7 @@ public class AddAlarmActivity extends AppCompatActivity {
     int hour;
     int minute;
     Toolbar toolbar;
+  //  int countId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +49,20 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+               // countId ++;
+
                 hour = timePicker.getCurrentHour();
-
                 minute = timePicker.getCurrentMinute();
-
-
                 Alarm alarm = new Alarm();
+
+                //alarm.setId(countId);
+
                 alarm.setHour(hour);
                 alarm.setMinute(minute);
+
+                String am_pm = (hour < 12) ? "AM" : "PM";
+                alarm.setAmpm(am_pm);
+
                 alarm.setEvent(event.getText().toString());
 
                 Intent intent = new Intent(AddAlarmActivity.this,MainActivity.class);

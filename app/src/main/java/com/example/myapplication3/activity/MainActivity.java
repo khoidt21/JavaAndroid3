@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
 
     int hour;
     String title = "Alarm";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,11 +89,24 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
                 if (data != null) {
                     Bundle getBundle = data.getExtras();
                     if (getBundle != null) {
-                        // lay duoc thong tin alarm
+                        // lay thong tin Alarm tu AddAlarmActivity
                         Alarm alarmResult = (Alarm) getBundle.getSerializable("alarmresult");
 
-                        // add thong tin cua alarm vao listAlarm
                         listAlarm.add(alarmResult);
+
+                        // add thong tin cua alarm vao db sqlite
+                        final AlarmDbHelper alarmDB = new AlarmDbHelper(getApplicationContext());
+                        Alarm alarm1 = new Alarm(alarmResult.getHour(),alarmResult.getMinute(),alarmResult.getAmpm(),
+                                alarmResult.getEvent(),alarmResult.isStatus());
+                        alarmDB.addAlarm(alarm1);
+
+                        System.out.println("---------------------lay du lieu hour tu DB ra " + alarmDB.getAlarms().getHour());
+                        System.out.println("---------------------lay du lieu minute tu DB ra" + alarmDB.getAlarms().getMinute());
+
+
+                        // add thong tin cua alarm vao listAlarm
+
+
                         recyclerView.setLayoutManager(new LinearLayoutManager(this));
                         AlarmAdapter adapter = new AlarmAdapter(listAlarm,this);
                         recyclerView.setAdapter(adapter);
@@ -111,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
         Intent intent_alarm_receiver = new Intent(MainActivity.this,AlarmReceiver.class);
         intent_alarm_receiver.putExtra("music_flag",true);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,requestCode,intent_alarm_receiver,PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),500,pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),10000,pendingIntent);
 
     }
 

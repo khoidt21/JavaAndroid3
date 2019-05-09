@@ -32,7 +32,6 @@ public class SettingMusicActivity extends AppCompatActivity {
         initView();
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Alarm");
-        final MusicSongID musicSongID = new MusicSongID();
 
         TextView textview_list = (TextView) findViewById(R.id.textview_list);
 
@@ -45,16 +44,15 @@ public class SettingMusicActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int i, long id) {
 
-                System.out.println("=====================" + resId[i]);
-
-                musicSongID.setSongID(resId[i]);
-
-                Intent intent = new Intent(SettingMusicActivity.this, Service.class);
-                intent.putExtra("keyIDSong",resId[i]);
+              //  System.out.println("=====================" + resId[i]);
 
 
+//                Intent intent = new Intent(SettingMusicActivity.this, Service.class);
+//                intent.putExtra("keyIDSong",resId[i]);
+//                SettingMusicActivity.this.startActivity(intent);
 
-                Log.e("==================== ++++",""+resId[i]);
+//
+//                Log.e("==================== ++++",""+resId[i]);
 
                 Toast.makeText(getApplicationContext(),"Bạn chọn chuông báo " + listNameFile[i],Toast.LENGTH_SHORT).show();
 

@@ -10,7 +10,6 @@
     app:titleMarginStart="155dp"
     app:titleTextColor="@android:color/white"
     >
-
 </android.support.v7.widget.Toolbar>
 
 

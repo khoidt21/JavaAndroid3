@@ -3,19 +3,66 @@ package model;
 import java.io.Serializable;
 
 public class Alarm implements Serializable {
+    private int id;
     private int hour;
     private int minute;
+    private String ampm;
     private String event;
-    private String title;
+    private boolean status;
+
+   // private int idsong;
+
+    public Alarm(){}
+    public Alarm(int hour,int minute,String ampm,String event,boolean status){
+        super();
+
+        // this.id = id;
+
+        this.hour = hour;
+        this.minute = minute;
+        this.ampm = ampm;
+        this.event = event;
+        this.status = status;
+
+      //  this.idsong = idsong;
+    }
+
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getAmpm() {
+        return ampm;
+    }
+
+    public void setAmpm(String ampm) {
+        this.ampm = ampm;
+    }
+
     private boolean toggleOnOff = false;
 
-    public String getTitle() {
-        return title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+//    public int getIdsong() {
+//        return idsong;
+//    }
+//
+//    public void setIdsong(int idsong) {
+//        this.idsong = idsong;
+//    }
+
+
 
     public int getHour() {
         return hour;
@@ -55,7 +102,6 @@ public class Alarm implements Serializable {
                 "hour=" + hour +
                 ", minute=" + minute +
                 ", event='" + event + '\'' +
-                ", title='" + title + '\'' +
                 ", toggleOnOff=" + toggleOnOff +
                 '}';
     }
