@@ -31,7 +31,7 @@ public class AddAlarmActivity extends AppCompatActivity {
     int hour;
     int minute;
     Toolbar toolbar;
-  //  int countId = 0;
+
     int countid = 0;
     boolean buttonToggleBoolean = false;
 
@@ -51,7 +51,10 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // tang bien countid sau moi lan add alarm
+
                 countid++;
+
                 hour = timePicker.getCurrentHour();
                 minute = timePicker.getCurrentMinute();
                 Alarm alarm = new Alarm();
