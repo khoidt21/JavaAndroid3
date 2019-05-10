@@ -32,7 +32,7 @@ public class AddAlarmActivity extends AppCompatActivity {
     int minute;
     Toolbar toolbar;
 
-    int countid = 0;
+   // int countid = 0;
     boolean buttonToggleBoolean = false;
 
     @Override
@@ -53,13 +53,14 @@ public class AddAlarmActivity extends AppCompatActivity {
 
                 // tang bien countid sau moi lan add alarm
 
-                countid++;
+              //  countid++;
 
                 hour = timePicker.getCurrentHour();
                 minute = timePicker.getCurrentMinute();
                 Alarm alarm = new Alarm();
 
-                alarm.setId(countid);
+               // alarm.setId(countid);
+
                 alarm.setHour(hour);
                 alarm.setMinute(minute);
                 String am_pm = (hour < 12) ? "AM" : "PM";
