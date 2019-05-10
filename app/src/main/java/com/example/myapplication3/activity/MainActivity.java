@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         AlarmAdapter adapter = new AlarmAdapter(listAlarm,this);
         recyclerView.setAdapter(adapter);
-
     }
 
     @Override
@@ -110,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
 
                         // add thong tin cua alarm vao db sqlite
 
-                        Alarm alarm1 = new Alarm(alarmResult.getHour(),alarmResult.getMinute(),alarmResult.getAmpm(),
+                        Alarm alarm1 = new Alarm(alarmResult.getId(),alarmResult.getHour(),alarmResult.getMinute(),alarmResult.getAmpm(),
                                 alarmResult.getEvent(),alarmResult.isStatus());
                         alarmDB.addAlarm(alarm1);
 
@@ -119,7 +118,9 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
 
 
                         // add thong tin cua alarm vao listAlarm
-
+                        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                        AlarmAdapter adapter = new AlarmAdapter(listAlarm,this);
+                        recyclerView.setAdapter(adapter);
 
 
                     }

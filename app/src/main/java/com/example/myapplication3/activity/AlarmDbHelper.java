@@ -16,7 +16,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "alarms";
 
-    //private static final String KEY_ID = "id";
+    private static final String KEY_ID = "id";
     private static final String KEY_HOUR = "hour";
     private static final String KEY_MINUTE = "minute";
     private static final String KEY_AM_PM = "ampm";
@@ -31,8 +31,8 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String create_alarms_table = String.format("CREATE TABLE %s(%s INTEGER,%s INTEGER,%s TEXT,%s TEXT,%s BOOLEAN)",
-                    TABLE_NAME,KEY_HOUR,KEY_MINUTE,KEY_AM_PM,KEY_EVENT,KEY_STATUS
+        String create_alarms_table = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY,%s INTEGER,%s INTEGER,%s TEXT,%s TEXT,%s BOOLEAN)",
+                    TABLE_NAME,KEY_ID,KEY_HOUR,KEY_MINUTE,KEY_AM_PM,KEY_EVENT,KEY_STATUS
                 );
         db.execSQL(create_alarms_table);
     }
@@ -47,7 +47,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        // values.put(KEY_ID,alarm.getId());
+        values.put(KEY_ID,alarm.getId());
 
         values.put(KEY_HOUR,alarm.getHour());
         values.put(KEY_MINUTE,alarm.getMinute());
@@ -63,24 +63,31 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
     public ArrayList<Alarm> getAlarms(){
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = new String[] { KEY_HOUR, KEY_MINUTE,KEY_AM_PM,KEY_EVENT,KEY_STATUS };
+        String[] columns = new String[] { KEY_ID,KEY_HOUR, KEY_MINUTE,KEY_AM_PM,KEY_EVENT,KEY_STATUS };
+
+       // Cursor cursor = db.query(TABLE_NAME, columns, null, null, null, null,null, columns + " DESC");
 
         Cursor cursor = db.query(TABLE_NAME, columns, null,
-                null, null, null, null);
+                null, null, null, KEY_ID + " DESC",null);
 
-       // Alarm alarm = new Alarm(cursor.getInt(0),cursor.getInt(1),
-                     //  cursor.getString(2),cursor.getString(3),
-                // cursor.getInt(4) > 0);
-        //return alarm;
+
+//        Cursor cursor = db.query(TABLE_NAME, columns, null,
+//                null, null, null, null,KEY_HOUR + " DESC",null);
+
         ArrayList<Alarm> alarmList = new ArrayList<>();
-        Alarm alarm = new Alarm();
-       if(cursor.moveToFirst()){
+
+        if(cursor.moveToFirst()){
            do{
-               int hour = cursor.getInt(0);
-               int minute = cursor.getInt(1);
-               String ampm = cursor.getString(2);
-               String event = cursor.getString(3);
-               boolean status = cursor.getInt(4) > 0;
+               Alarm alarm = new Alarm();
+               int id = cursor.getInt(0);
+               int hour = cursor.getInt(1);
+               int minute = cursor.getInt(2);
+               String ampm = cursor.getString(3);
+               String event = cursor.getString(4);
+
+               // boolean alarm luc dau bang false
+
+               boolean status = cursor.getInt(5) > 0;
 
                alarm.setHour(hour);
                alarm.setMinute(minute);
@@ -91,8 +98,8 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
                alarmList.add(alarm);
 
            }while (cursor.moveToNext());
-       }
-       return alarmList;
+        }
+        return alarmList;
     }
 
 
