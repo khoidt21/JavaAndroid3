@@ -112,7 +112,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
 
         //values.put(KEY_SONG,alarm.getIdsong());
 
-        db.update(TABLE_NAME,values,KEY_ID + "=?",new String[]{String.valueOf(alarm.getId())});
+        db.update(TABLE_NAME,values,KEY_HOUR + "=? AND "+KEY_MINUTE +"=?",new String[]{String.valueOf(alarm.getId())});
         db.close();
     }
 }

@@ -152,7 +152,10 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         intent_alarm_receiver.putExtra("music_flag",true);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,requestCode,intent_alarm_receiver,PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),10000,pendingIntent);
+       // alarmDB.addAlarm(alarm);
 
+
+        alarmDB.updateAlarm(alarm);
     }
 
     @Override
@@ -163,5 +166,10 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         alarmManager.cancel(pendingIntent);
         sendBroadcast(intent_alarm_receiver);
         Toast.makeText(this, "Alarm stopped!", Toast.LENGTH_SHORT).show();
+       // alarmDB.addAlarm(alarm);
+
+
+        //alarmDB.updateAlarm(alarm);
     }
+
 }

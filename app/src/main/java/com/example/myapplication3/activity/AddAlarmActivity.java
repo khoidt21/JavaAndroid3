@@ -73,7 +73,7 @@ public class AddAlarmActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     public void initView(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
     }

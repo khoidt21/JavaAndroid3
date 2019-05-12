@@ -81,7 +81,7 @@ import model.Alarm;
 
                     alarmListener.startAlarm(alarm,i);
 
-                    checkToggle = true;
+                    //checkToggle = true;
 
                    // Intent intent = new Intent(AlarmAdapter.this,MainActivity.class);
                     //intent.putExtra("statustoggle",checkToggle);
