@@ -80,11 +80,12 @@ import model.Alarm;
                 if(isChecked){
                     alarmListener.startAlarm(alarm,i);
                     //alarm.setStatus(true);
+                    alarms.get(i).setStatus(true);
 
-                    
                 }else{
                     alarmListener.cancelAlarm(alarm,i);
                     //alarm.setStatus(false);
+                    alarms.get(i).setStatus(false);
 
                 }
             }
