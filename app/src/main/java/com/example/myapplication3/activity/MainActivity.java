@@ -78,14 +78,14 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-
-        menu.setHeaderTitle("Select The Action");
-        menu.add(0, v.getId(), 0, "Call");
-        menu.add(0, v.getId(), 0, "SMS");
-    }
+//    @Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//
+//        menu.setHeaderTitle("Select The Action");
+//        menu.add(0, v.getId(), 0, "Call");
+//        menu.add(0, v.getId(), 0, "SMS");
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -152,10 +152,11 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         intent_alarm_receiver.putExtra("music_flag",true);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,requestCode,intent_alarm_receiver,PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),10000,pendingIntent);
-       // alarmDB.addAlarm(alarm);
+
+        // alarmDB.addAlarm(alarm);
 
 
-        alarmDB.updateAlarm(alarm);
+       // alarmDB.updateAlarm(alarm);
     }
 
     @Override
@@ -171,5 +172,6 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
 
         //alarmDB.updateAlarm(alarm);
     }
+
 
 }

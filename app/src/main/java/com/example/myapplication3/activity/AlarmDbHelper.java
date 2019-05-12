@@ -93,9 +93,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
                alarm.setAmpm(ampm);
                alarm.setEvent(event);
                alarm.setStatus(status);
-
                alarmList.add(alarm);
-
            }while (cursor.moveToNext());
         }
         return alarmList;
@@ -112,7 +110,11 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
 
         //values.put(KEY_SONG,alarm.getIdsong());
 
-        db.update(TABLE_NAME,values,KEY_HOUR + "=? AND "+KEY_MINUTE +"=?",new String[]{String.valueOf(alarm.getId())});
+        String[] args = new String[]{KEY_HOUR,KEY_MINUTE};
+
+        //db.update(TABLE_NAME,values,KEY_HOUR + "=?",new String[]{String.valueOf(alarm.getHour())});
+
+        db.update(TABLE_NAME,values,"hour=? AND minute=?",args);
         db.close();
     }
 }

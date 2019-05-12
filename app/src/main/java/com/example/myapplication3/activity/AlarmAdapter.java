@@ -78,19 +78,13 @@ import model.Alarm;
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-
                     alarmListener.startAlarm(alarm,i);
+                    //alarm.setStatus(true);
 
-                    //checkToggle = true;
-
-                   // Intent intent = new Intent(AlarmAdapter.this,MainActivity.class);
-                    //intent.putExtra("statustoggle",checkToggle);
-
-//
-//                    alarm.setStatus(checkToggle);
+                    
                 }else{
                     alarmListener.cancelAlarm(alarm,i);
-                    //checkToggle = false;
+                    //alarm.setStatus(false);
 
                 }
             }
