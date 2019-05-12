@@ -19,7 +19,6 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="" />
-
     <Button
         android:id="@+id/btnAddAlarm"
         android:layout_width="wrap_content"

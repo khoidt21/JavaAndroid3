@@ -3,6 +3,7 @@ package com.example.myapplication3.activity;
 
 import android.app.AlarmManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,8 @@ import model.Alarm;
     AlarmListener alarmListener;
 
    // boolean checkToggle = false;
+
+        public boolean checkToggle = false;
 
     public AlarmAdapter(List<Alarm> alarms, AlarmListener l) {
         this.alarms = alarms;
@@ -60,8 +63,7 @@ import model.Alarm;
         int hour = alarms.get(i).getHour();
         int minute = alarms.get(i).getMinute();
         String eventAlarm = alarms.get(i).getEvent();
-
-
+        
         if(alarms.get(i).getMinute() < 10){
             hourShow.setText(hour + ":" + 0 + minute);
         }
@@ -78,10 +80,18 @@ import model.Alarm;
                 if(isChecked){
 
                     alarmListener.startAlarm(alarm,i);
-                    //checkToggle = true;
+
+                    checkToggle = true;
+
+                   // Intent intent = new Intent(AlarmAdapter.this,MainActivity.class);
+                    //intent.putExtra("statustoggle",checkToggle);
+
+//
+//                    alarm.setStatus(checkToggle);
                 }else{
                     alarmListener.cancelAlarm(alarm,i);
                     //checkToggle = false;
+
                 }
             }
         });

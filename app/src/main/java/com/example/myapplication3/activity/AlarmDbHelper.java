@@ -65,10 +65,9 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = new String[] { KEY_ID,KEY_HOUR, KEY_MINUTE,KEY_AM_PM,KEY_EVENT,KEY_STATUS };
 
-       // Cursor cursor = db.query(TABLE_NAME, columns, null, null, null, null,null, columns + " DESC");
-
         Cursor cursor = db.query(TABLE_NAME, columns, null,
-                null, null, null, KEY_ID + " DESC",null);
+                null, null, null, KEY_ID
+                        + " DESC",null);
 
 
 //        Cursor cursor = db.query(TABLE_NAME, columns, null,
@@ -102,20 +101,18 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         return alarmList;
     }
 
+    public void updateAlarm(Alarm alarm){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_HOUR,alarm.getHour());
+        values.put(KEY_MINUTE,alarm.getMinute());
+        values.put(KEY_AM_PM,alarm.getAmpm());
+        values.put(KEY_EVENT,alarm.getEvent());
+        values.put(KEY_STATUS,alarm.isStatus());
 
-//    public void updateAlarm(Alarm alarm){
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(KEY_HOUR,alarm.getHour());
-//        values.put(KEY_MINUTE,alarm.getMinute());
-//        values.put(KEY_AM_PM,alarm.getAmpm());
-//        values.put(KEY_EVENT,alarm.getEvent());
-//        values.put(KEY_STATUS,alarm.isStatus());
-//
-//        //values.put(KEY_SONG,alarm.getIdsong());
-//
-//        db.update(TABLE_NAME,values,KEY_ID + "=?",new String[]{String.valueOf(alarm.getId())});
-//        db.close();
-//    }
+        //values.put(KEY_SONG,alarm.getIdsong());
 
+        db.update(TABLE_NAME,values,KEY_ID + "=?",new String[]{String.valueOf(alarm.getId())});
+        db.close();
+    }
 }

@@ -10,8 +10,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -22,7 +24,7 @@ import java.util.Calendar;
 import java.util.List;
 import model.Alarm;
 
-public class MainActivity extends AppCompatActivity implements AlarmListener{
+public class MainActivity extends AppCompatActivity implements AlarmListener, View.OnCreateContextMenuListener {
 
     private static final int REQUEST_CODE = 0 ;
     Toolbar toolbar;
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
         // khoi tao alarmManager
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
     }
+
     public void setAlarmToAdapter(){
         alarmAdapter = new AlarmAdapter(listAlarm,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -76,12 +79,22 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
     }
 
     @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        menu.setHeaderTitle("Select The Action");
+        menu.add(0, v.getId(), 0, "Call");
+        menu.add(0, v.getId(), 0, "SMS");
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_alarm :
                 Intent myIntent = new Intent(MainActivity.this, AddAlarmActivity.class);
                 MainActivity.this.startActivityForResult(myIntent, REQUEST_ALARM);
                 break;
+
 
             // loi do case nay
 //            case R.id.add_setting:
@@ -107,21 +120,19 @@ public class MainActivity extends AppCompatActivity implements AlarmListener{
 
                         listAlarm.add(alarmResult);
 
-                        // add thong tin cua alarm vao db sqlite
+                        System.out.println("--------------------alarm status //////" + alarmResult.isStatus());
 
+                        // add thong tin cua alarm vao db sqlite
                         Alarm alarm1 = new Alarm(alarmResult.getId(),alarmResult.getHour(),alarmResult.getMinute(),alarmResult.getAmpm(),
                                 alarmResult.getEvent(),alarmResult.isStatus());
                         alarmDB.addAlarm(alarm1);
 
-                       // System.out.println("---------------------lay du lieu hour tu DB ra " + alarmDB.getAlarms().getHour());
-                        //System.out.println("---------------------lay du lieu minute tu DB ra" + alarmDB.getAlarms().getMinute());
-
-
                         // add thong tin cua alarm vao listAlarm
-                        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                        AlarmAdapter adapter = new AlarmAdapter(listAlarm,this);
-                        recyclerView.setAdapter(adapter);
 
+//                        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//                        AlarmAdapter adapter = new AlarmAdapter(listAlarm,this);
+//                        recyclerView.setAdapter(adapter);
+                        setAlarmToAdapter();
 
                     }
                 }
