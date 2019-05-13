@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
 
         // alarmDB.addAlarm(alarm);
 
-        alarmDB.updateAlarm(alarm);
+        //alarmDB.updateAlarm(alarm);
     }
 
     @Override

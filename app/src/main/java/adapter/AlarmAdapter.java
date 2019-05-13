@@ -84,7 +84,9 @@ import model.Alarm;
                     //alarm.setStatus(true);
 
                     alarm.setStatus(true);
+                    AlarmDbHelper alarmDbHelper = new AlarmDbHelper(mContext);
                     alarmListener.startAlarm(alarm,i);
+                    alarmDbHelper.updateAlarm(alarm);
 
                     //  alarmDbHelper.updateAlarm(alarm);
                    // alarms.get(i).setStatus(toggle);
@@ -93,9 +95,7 @@ import model.Alarm;
 
                     alarm.setStatus(false);
                     alarmListener.cancelAlarm(alarm,i);
-
-                    //alarms.get(i).setStatus(toggle);
-                    //alarmDbHelper.updateAlarm(alarm);
+                    alarmDbHelper.updateAlarm(alarm);
 
                 }
             }
