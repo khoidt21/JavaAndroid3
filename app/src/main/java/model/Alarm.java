@@ -8,12 +8,14 @@ public class Alarm implements Serializable {
     private int minute;
     private String ampm;
     private String event;
-    private boolean status;
+
+    //  private boolean status;
 
    // private int idsong;
+   private boolean toggleOnOff = false;
 
     public Alarm(){}
-    public Alarm(int hour,int minute,String ampm,String event){
+    public Alarm(int hour,int minute,String ampm,String event,boolean toggleOnOff){
         super();
 
        // this.id = id;
@@ -22,6 +24,8 @@ public class Alarm implements Serializable {
         this.minute = minute;
         this.ampm = ampm;
         this.event = event;
+        this.toggleOnOff = toggleOnOff;
+
         //this.status = status;
 
       //  this.idsong = idsong;
@@ -35,13 +39,13 @@ public class Alarm implements Serializable {
         this.id = id;
     }
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
+//    public boolean isStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(boolean status) {
+//        this.status = status;
+//    }
 
     public String getAmpm() {
         return ampm;
@@ -51,7 +55,6 @@ public class Alarm implements Serializable {
         this.ampm = ampm;
     }
 
-    private boolean toggleOnOff = false;
 
 
 //    public int getIdsong() {

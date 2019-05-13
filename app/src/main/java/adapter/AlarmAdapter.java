@@ -68,7 +68,8 @@ import model.Alarm;
 
         amPm.setText(alarms.get(i).getAmpm());
         event.setText(alarms.get(i).getEvent());
-        final boolean toggle = alarms.get(i).isStatus();
+
+        final boolean toggle = alarms.get(i).isToggleOnOff();
 
         System.out.println("lay tu sqlite ra " + toggle);
         if(toggle){
@@ -85,9 +86,12 @@ import model.Alarm;
                     // update trang thai cua status
                     //alarm.setStatus(true);
 
-                    alarm.setStatus(true);
+                    //alarms.get(i).setToggleOnOff(true);
+                    boolean checkedAlarm = true;
+                    alarm.setToggleOnOff(checkedAlarm);
 
-                    System.out.println("=========================/////////////" + alarm.isStatus());
+                   // System.out.println("=======update toggle button ==================/////////////" + alarm.isToggleOnOff());
+
                     AlarmDbHelper alarmDbHelper = new AlarmDbHelper(mContext);
                     alarmListener.startAlarm(alarm,i);
                     alarmDbHelper.updateAlarm(alarm);

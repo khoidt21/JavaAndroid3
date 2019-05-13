@@ -48,7 +48,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         values.put(KEY_MINUTE,alarm.getMinute());
         values.put(KEY_AM_PM,alarm.getAmpm());
         values.put(KEY_EVENT,alarm.getEvent());
-        values.put(KEY_STATUS,alarm.isStatus());
+        values.put(KEY_STATUS,alarm.isToggleOnOff());
 
         // values.put(KEY_SONG,alarm.getIdsong());
 
@@ -81,7 +81,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
                alarm.setMinute(minute);
                alarm.setAmpm(ampm);
                alarm.setEvent(event);
-               alarm.setStatus(status);
+               alarm.setToggleOnOff(status);
                alarmList.add(alarm);
            }while (cursor.moveToNext());
         }
@@ -95,7 +95,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         values.put(KEY_MINUTE,alarm.getMinute());
         values.put(KEY_AM_PM,alarm.getAmpm());
         values.put(KEY_EVENT,alarm.getEvent());
-        values.put(KEY_STATUS,alarm.isStatus());
+        values.put(KEY_STATUS,alarm.isToggleOnOff());
 
         String[] args = new String[]{KEY_HOUR,KEY_MINUTE};
         db.update(TABLE_NAME,values,"hour=? AND minute=?",args);
