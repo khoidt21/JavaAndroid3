@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
                 String am_pm = (hour < 12) ? "AM" : "PM";
 
                 // Tao doi tuong alarm moi
-                Alarm alarm = new Alarm(hour,minute,am_pm,event,false);
+                Alarm alarm = new Alarm(hour,minute,am_pm,event);
                 listAlarm.add(alarm);
                 insertNewAlarm(alarm);
             }

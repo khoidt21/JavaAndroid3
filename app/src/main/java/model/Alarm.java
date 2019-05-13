@@ -13,7 +13,7 @@ public class Alarm implements Serializable {
    // private int idsong;
 
     public Alarm(){}
-    public Alarm(int hour,int minute,String ampm,String event,boolean status){
+    public Alarm(int hour,int minute,String ampm,String event){
         super();
 
        // this.id = id;
@@ -22,7 +22,7 @@ public class Alarm implements Serializable {
         this.minute = minute;
         this.ampm = ampm;
         this.event = event;
-        this.status = status;
+        //this.status = status;
 
       //  this.idsong = idsong;
     }
