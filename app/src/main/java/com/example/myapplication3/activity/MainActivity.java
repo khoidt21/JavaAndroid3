@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
     private static final int REQUEST_CODE = 0 ;
     Toolbar toolbar;
     RecyclerView recyclerView;
-    ArrayList<Alarm> listAlarm = new ArrayList<>();
+    public ArrayList<Alarm> listAlarm = new ArrayList<>();
     public static final int REQUEST_ALARM = 2048;
     AlarmManager alarmManager;
     AlarmAdapter alarmAdapter;
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
                 int minute = data.getIntExtra("MINUTE",0);
                 String event = data.getStringExtra("EVENT");
                 String am_pm = (hour < 12) ? "AM" : "PM";
-                int isToggleOnOff = 0;
+                boolean isToggleOnOff = false;
                 // Tao doi tuong alarm moi
                 Alarm alarm = new Alarm(hour,minute,am_pm,event,isToggleOnOff);
                 listAlarm.add(alarm);

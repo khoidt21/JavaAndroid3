@@ -20,6 +20,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
     private static final String KEY_EVENT = "event";
     private static final String KEY_STATUS = "status";
 
+
     // private static final String KEY_SONG = "idsong";
 
 
@@ -48,7 +49,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         values.put(KEY_MINUTE,alarm.getMinute());
         values.put(KEY_AM_PM,alarm.getAmpm());
         values.put(KEY_EVENT,alarm.getEvent());
-        values.put(KEY_STATUS,alarm.isToggleOnOff());
+        values.put(KEY_STATUS,(alarm.isToggleOnOff() ? 1 : 0));
 
         // values.put(KEY_SONG,alarm.getIdsong());
 
@@ -75,13 +76,17 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
                String event = cursor.getString(4);
 
                // boolean alarm luc dau bang false
-               int status = cursor.getInt(5);
+               int status = cursor.getInt(5 );
 
                alarm.setHour(hour);
                alarm.setMinute(minute);
                alarm.setAmpm(ampm);
                alarm.setEvent(event);
-               alarm.setToggleOnOff(status);
+               if(status == 1){
+
+               alarm.setToggleOnOff(true);
+               }
+               else if(status == 0){alarm.setToggleOnOff(false);}
                alarmList.add(alarm);
            }while (cursor.moveToNext());
         }
@@ -95,9 +100,9 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         values.put(KEY_MINUTE,alarm.getMinute());
         values.put(KEY_AM_PM,alarm.getAmpm());
         values.put(KEY_EVENT,alarm.getEvent());
-        values.put(KEY_STATUS,alarm.isToggleOnOff());
+        values.put(KEY_STATUS, (alarm.isToggleOnOff() ? 1 : 0));
 
-        String[] args = new String[]{KEY_HOUR,KEY_MINUTE};
+        String[] args = new String[]{String.valueOf(alarm.getHour()) , String.valueOf(alarm.getMinute())};
         db.update(TABLE_NAME,values,"hour=? AND minute=?",args);
         db.close();
     }

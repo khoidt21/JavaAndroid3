@@ -11,6 +11,8 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import com.example.myapplication3.R;
+import com.example.myapplication3.activity.MainActivity;
+
 import dbhelper.AlarmDbHelper;
 import listener.AlarmListener;
 
@@ -22,12 +24,14 @@ import model.Alarm;
     List<Alarm> alarms;
     AlarmListener alarmListener;
     AlarmDbHelper alarmDbHelper;
-    private Context mContext;
+    private Context context;
+
+//    AlarmDbHelper alarmDbHelper = null;
 
 
     public AlarmAdapter(Context context,List<Alarm> alarms, AlarmListener l) {
         this.alarms = alarms;
-        this.mContext = context;
+        this.context = context;
         this.alarmListener = l;
     }
 
@@ -69,49 +73,37 @@ import model.Alarm;
         amPm.setText(alarms.get(i).getAmpm());
         event.setText(alarms.get(i).getEvent());
 
-        final int toggle = alarms.get(i).isToggleOnOff();
+        final boolean toggle = alarms.get(i).isToggleOnOff();
 
        // System.out.println("lay tu sqlite ra " + toggle);
-        if(toggle == 0){
+        if(toggle == false){
             toggleButton.setChecked(false);
         }
-        else {
+        else if(toggle == true) {
             toggleButton.setChecked(true);
         }
-
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    // update trang thai cua status
-                    //alarm.setStatus(true);
 
-                    //alarms.get(i).setToggleOnOff(true);
-                    int checkedAlarm = 1;
-                    alarm.setToggleOnOff(checkedAlarm);
-
-                   // System.out.println("=======update toggle button ==================/////////////" + alarm.isToggleOnOff());
-
-                    AlarmDbHelper alarmDbHelper = new AlarmDbHelper(mContext);
+                    alarm.setToggleOnOff(true);
+                    alarmDbHelper = new AlarmDbHelper(context);
                     alarmListener.startAlarm(alarm,i);
                     alarmDbHelper.updateAlarm(alarm);
-
-                    //  alarmDbHelper.updateAlarm(alarm);
-                   // alarms.get(i).setStatus(toggle);
-
                 }else{
 
-                    //alarm.setStatus(false);
-
+                    alarm.setToggleOnOff(false);
                     alarmListener.cancelAlarm(alarm,i);
-
-                    // alarmDbHelper.updateAlarm(alarm);
+                    alarmDbHelper = new AlarmDbHelper(context);
+                    alarmDbHelper.updateAlarm(alarm);
 
                 }
             }
         });
 
     }
+
 
     @Override
     public int getItemCount() {
