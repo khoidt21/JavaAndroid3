@@ -13,10 +13,11 @@ public class Alarm implements Serializable {
    // private int idsong;
 
     public Alarm(){}
-    public Alarm(int id,int hour,int minute,String ampm,String event,boolean status){
+    public Alarm(int hour,int minute,String ampm,String event,boolean status){
         super();
 
-        this.id = id;
+       // this.id = id;
+
         this.hour = hour;
         this.minute = minute;
         this.ampm = ampm;

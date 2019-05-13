@@ -1,4 +1,4 @@
-package com.example.myapplication3.activity;
+package service;
 
 import android.app.Service;
 import android.content.Context;
@@ -9,10 +9,9 @@ import android.os.IBinder;
 import com.example.myapplication3.R;
 import android.content.Intent;
 
-public class Music extends Service {
+public class AlarmService extends Service {
 
     MediaPlayer mediaPlayer;
-
 
     @Override
     public IBinder onBind(Intent intent) {

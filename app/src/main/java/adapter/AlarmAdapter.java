@@ -1,5 +1,5 @@
 
-package com.example.myapplication3.activity;
+package adapter;
 
 import android.app.AlarmManager;
 import android.content.Context;
@@ -14,6 +14,9 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import com.example.myapplication3.R;
+import com.example.myapplication3.activity.AlarmDbHelper;
+import com.example.myapplication3.activity.AlarmListener;
+
 import java.sql.Time;
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -25,13 +28,13 @@ import model.Alarm;
 
     List<Alarm> alarms;
     AlarmListener alarmListener;
+    AlarmDbHelper alarmDbHelper;
+    private Context mContext;
 
-   // boolean checkToggle = false;
 
-        public boolean checkToggle = false;
-
-    public AlarmAdapter(List<Alarm> alarms, AlarmListener l) {
+    public AlarmAdapter(Context context,List<Alarm> alarms, AlarmListener l) {
         this.alarms = alarms;
+        this.mContext = context;
         this.alarmListener = l;
     }
 
@@ -54,11 +57,10 @@ import model.Alarm;
         TextView amPm = viewHolder.itemView.findViewById(R.id.txtAmPm);
         TextView event = viewHolder.itemView.findViewById(R.id.txtEvent);
         final ToggleButton toggleButton = viewHolder.itemView.findViewById(R.id.tglAlarm);
+
         final Alarm alarm = alarms.get(i);
 
-        // lay id cua alarm
-       // int id = alarms.get(i).getId();
-
+        //System.out.println("================== alarms"+ alarms.size());
 
         int hour = alarms.get(i).getHour();
         int minute = alarms.get(i).getMinute();
@@ -73,19 +75,28 @@ import model.Alarm;
 
         amPm.setText(alarms.get(i).getAmpm());
         event.setText(alarms.get(i).getEvent());
+        final boolean toggle = alarms.get(i).isToggleOnOff();
+        if(toggle){
+            toggleButton.setChecked(true);
+        }
+        else{
+            toggleButton.setChecked(false);
+        }
 
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    // update trang thai cua status
+                    alarm.setStatus(true);
                     alarmListener.startAlarm(alarm,i);
-                    //alarm.setStatus(true);
-                    alarms.get(i).setStatus(true);
+                   // alarms.get(i).setStatus(toggle);
 
                 }else{
+
+                    alarm.setStatus(false);
                     alarmListener.cancelAlarm(alarm,i);
-                    //alarm.setStatus(false);
-                    alarms.get(i).setStatus(false);
+                   //alarms.get(i).setStatus(toggle);
 
                 }
             }

@@ -1,9 +1,10 @@
-package com.example.myapplication3.activity;
+package receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+
+import service.AlarmService;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
@@ -13,14 +14,14 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Boolean check = intent.getExtras().getBoolean("music_flag");
         if(check==true){
-            Intent intentMusic = new Intent(context,Music.class);
+            Intent intentMusic = new Intent(context, AlarmService.class);
             context.startService(intentMusic);
         }else{
-            Intent intentMusic = new Intent(context,Music.class);
+            Intent intentMusic = new Intent(context, AlarmService.class);
             context.stopService(intentMusic);
         }
 
-        Intent myIntent = new Intent(context,Music.class);
+        Intent myIntent = new Intent(context, AlarmService.class);
         context.startService(intent);
     }
 

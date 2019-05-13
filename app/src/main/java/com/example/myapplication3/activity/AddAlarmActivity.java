@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
-
 import com.example.myapplication3.R;
 import java.util.ArrayList;
 
@@ -26,11 +25,12 @@ import model.Alarm;
 public class AddAlarmActivity extends AppCompatActivity {
 
     TimePicker timePicker;
-    EditText event;
+    String event;
     Button btnAddAlarm;
     int hour;
     int minute;
     Toolbar toolbar;
+    EditText editText;
 
     boolean buttonToggleBoolean = false;
 
@@ -44,7 +44,7 @@ public class AddAlarmActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Alarm");
         btnAddAlarm = (Button) findViewById(R.id.btnAddAlarm);
         timePicker = (TimePicker) findViewById(R.id.timePicker);
-        event = (EditText) findViewById(R.id.editEvent);
+        editText = (EditText) findViewById(R.id.editEvent);
 
         btnAddAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,28 +52,17 @@ public class AddAlarmActivity extends AppCompatActivity {
 
                 hour = timePicker.getCurrentHour();
                 minute = timePicker.getCurrentMinute();
-                Alarm alarm = new Alarm();
+                event = editText.getText().toString();
 
-               // alarm.setId(countid);
-
-                alarm.setHour(hour);
-                alarm.setMinute(minute);
-                String am_pm = (hour < 12) ? "AM" : "PM";
-                alarm.setAmpm(am_pm);
-                alarm.setEvent(event.getText().toString());
-
-                //alarm.setStatus(buttonToggleBoolean);
-
-                Intent intent = new Intent(AddAlarmActivity.this,MainActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("alarmresult",alarm);
-                intent.putExtras(bundle);
-                setResult(RESULT_OK, intent);
+                Intent intent = new Intent();
+                intent.putExtra("HOUR",hour);
+                intent.putExtra("MINUTE",minute);
+                intent.putExtra("EVENT",event);
+                setResult(1019, intent);
                 finish();
             }
         });
     }
-
     public void initView(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
     }

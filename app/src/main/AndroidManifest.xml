@@ -30,8 +30,8 @@
                 <action android:name="com.lge.clock.alarmalert.stop" />
             </intent-filter>
         </activity>
-        <receiver android:name=".activity.AlarmReceiver"/>
-        <service android:name=".activity.Music"
+        <receiver android:name="receiver.AlarmReceiver"/>
+        <service android:name="service.AlarmService"
             android:enabled="true" />
     </application>
 

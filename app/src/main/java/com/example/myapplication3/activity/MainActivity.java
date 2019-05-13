@@ -9,20 +9,19 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
+
 import com.example.myapplication3.R;
-import java.lang.reflect.Field;
+
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+
+import adapter.AlarmAdapter;
 import model.Alarm;
+import receiver.AlarmReceiver;
 
 public class MainActivity extends AppCompatActivity implements AlarmListener, View.OnCreateContextMenuListener {
 
@@ -33,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
     public static final int REQUEST_ALARM = 2048;
     AlarmManager alarmManager;
     AlarmAdapter alarmAdapter;
+
+    RecyclerView.LayoutManager layoutManager;
 
     int hour;
     String title = "Alarm";
@@ -66,10 +67,11 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
     }
 
     public void setAlarmToAdapter(){
-        alarmAdapter = new AlarmAdapter(listAlarm,this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        AlarmAdapter adapter = new AlarmAdapter(listAlarm,this);
-        recyclerView.setAdapter(adapter);
+
+        alarmAdapter = new AlarmAdapter(this, listAlarm, this);
+        layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(alarmAdapter);
     }
 
     @Override
@@ -111,52 +113,45 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_ALARM) {
-            if (resultCode == RESULT_OK) {
-                if (data != null) {
-                    Bundle getBundle = data.getExtras();
-                    if (getBundle != null) {
-                        // lay thong tin Alarm tu AddAlarmActivity
-                        Alarm alarmResult = (Alarm) getBundle.getSerializable("alarmresult");
+            if (resultCode == 1019) {
+                // lay data tu intent
+                int hour = data.getIntExtra("HOUR",0);
+                int minute = data.getIntExtra("MINUTE",0);
+                String event = data.getStringExtra("EVENT");
+                String am_pm = (hour < 12) ? "AM" : "PM";
 
-                        listAlarm.add(alarmResult);
-
-                        System.out.println("--------------------alarm status //////" + alarmResult.isStatus());
-
-                        // add thong tin cua alarm vao db sqlite
-                        Alarm alarm1 = new Alarm(alarmResult.getId(),alarmResult.getHour(),alarmResult.getMinute(),alarmResult.getAmpm(),
-                                alarmResult.getEvent(),alarmResult.isStatus());
-                        alarmDB.addAlarm(alarm1);
-
-                        // add thong tin cua alarm vao listAlarm
-
-//                        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//                        AlarmAdapter adapter = new AlarmAdapter(listAlarm,this);
-//                        recyclerView.setAdapter(adapter);
-                        setAlarmToAdapter();
-
-                    }
-                }
+                // Tao doi tuong alarm moi
+                Alarm alarm = new Alarm(hour,minute,am_pm,event,false);
+                listAlarm.add(alarm);
+                insertNewAlarm(alarm);
             }
 
         }
 
     }
 
+    //ham them 1 alar moi
+    private void insertNewAlarm(Alarm alarm) {
+        //cap nhat them moi mot alarm
+        int index = alarmAdapter.getItemCount();
+        alarmAdapter.notifyItemInserted(index);
+        //AlarmDbHelper alarmDbHelper = new AlarmDbHelper();
+        alarmDB.addAlarm(alarm);
+    }
 
     @Override
     public void startAlarm(Alarm alarm, int requestCode) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, alarm.getHour());
         calendar.set(Calendar.MINUTE, alarm.getMinute());
-        Intent intent_alarm_receiver = new Intent(MainActivity.this,AlarmReceiver.class);
+        Intent intent_alarm_receiver = new Intent(MainActivity.this, AlarmReceiver.class);
         intent_alarm_receiver.putExtra("music_flag",true);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,requestCode,intent_alarm_receiver,PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),10000,pendingIntent);
 
         // alarmDB.addAlarm(alarm);
 
-
-       // alarmDB.updateAlarm(alarm);
+        alarmDB.updateAlarm(alarm);
     }
 
     @Override

@@ -47,8 +47,6 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        //values.put(KEY_ID,alarm.getId());
-
         values.put(KEY_HOUR,alarm.getHour());
         values.put(KEY_MINUTE,alarm.getMinute());
         values.put(KEY_AM_PM,alarm.getAmpm());
@@ -69,12 +67,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
                 null, null, null, KEY_ID
                         + " DESC",null);
 
-
-//        Cursor cursor = db.query(TABLE_NAME, columns, null,
-//                null, null, null, null,KEY_HOUR + " DESC",null);
-
         ArrayList<Alarm> alarmList = new ArrayList<>();
-
         if(cursor.moveToFirst()){
            do{
                Alarm alarm = new Alarm();
@@ -85,7 +78,6 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
                String event = cursor.getString(4);
 
                // boolean alarm luc dau bang false
-
                boolean status = cursor.getInt(5) > 0;
 
                alarm.setHour(hour);
@@ -108,12 +100,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         values.put(KEY_EVENT,alarm.getEvent());
         values.put(KEY_STATUS,alarm.isStatus());
 
-        //values.put(KEY_SONG,alarm.getIdsong());
-
         String[] args = new String[]{KEY_HOUR,KEY_MINUTE};
-
-        //db.update(TABLE_NAME,values,KEY_HOUR + "=?",new String[]{String.valueOf(alarm.getHour())});
-
         db.update(TABLE_NAME,values,"hour=? AND minute=?",args);
         db.close();
     }
