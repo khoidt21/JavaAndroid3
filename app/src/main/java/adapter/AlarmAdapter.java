@@ -69,14 +69,14 @@ import model.Alarm;
         amPm.setText(alarms.get(i).getAmpm());
         event.setText(alarms.get(i).getEvent());
 
-        final boolean toggle = alarms.get(i).isToggleOnOff();
+        final int toggle = alarms.get(i).isToggleOnOff();
 
-        System.out.println("lay tu sqlite ra " + toggle);
-        if(toggle){
-            toggleButton.setChecked(true);
-        }
-        else{
+       // System.out.println("lay tu sqlite ra " + toggle);
+        if(toggle == 0){
             toggleButton.setChecked(false);
+        }
+        else {
+            toggleButton.setChecked(true);
         }
 
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -87,7 +87,7 @@ import model.Alarm;
                     //alarm.setStatus(true);
 
                     //alarms.get(i).setToggleOnOff(true);
-                    boolean checkedAlarm = true;
+                    int checkedAlarm = 1;
                     alarm.setToggleOnOff(checkedAlarm);
 
                    // System.out.println("=======update toggle button ==================/////////////" + alarm.isToggleOnOff());

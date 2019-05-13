@@ -28,7 +28,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String create_alarms_table = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY AUTOINCREMENT,%s INTEGER,%s INTEGER,%s TEXT,%s TEXT,%s BOOLEAN)",
+        String create_alarms_table = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY AUTOINCREMENT,%s INTEGER,%s INTEGER,%s TEXT,%s TEXT,%s INTEGER)",
                     TABLE_NAME,KEY_ID,KEY_HOUR,KEY_MINUTE,KEY_AM_PM,KEY_EVENT,KEY_STATUS
                 );
         db.execSQL(create_alarms_table);
@@ -75,7 +75,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
                String event = cursor.getString(4);
 
                // boolean alarm luc dau bang false
-               boolean status = cursor.getInt(5) > 0;
+               int status = cursor.getInt(5);
 
                alarm.setHour(hour);
                alarm.setMinute(minute);

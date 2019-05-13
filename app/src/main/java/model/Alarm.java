@@ -12,10 +12,10 @@ public class Alarm implements Serializable {
     //  private boolean status;
 
    // private int idsong;
-   private boolean toggleOnOff = false;
+   private int toggleOnOff;
 
     public Alarm(){}
-    public Alarm(int hour,int minute,String ampm,String event,boolean toggleOnOff){
+    public Alarm(int hour,int minute,String ampm,String event,int toggleOnOff){
         super();
 
        // this.id = id;
@@ -91,11 +91,11 @@ public class Alarm implements Serializable {
         this.event = event;
     }
 
-    public boolean isToggleOnOff() {
+    public int isToggleOnOff() {
         return toggleOnOff;
     }
 
-    public void setToggleOnOff(boolean toggleOnOff) {
+    public void setToggleOnOff(int toggleOnOff) {
         this.toggleOnOff = toggleOnOff;
     }
 
