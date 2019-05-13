@@ -1,11 +1,8 @@
 
 package adapter;
 
-import android.app.AlarmManager;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +11,9 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import com.example.myapplication3.R;
-import com.example.myapplication3.activity.AlarmDbHelper;
-import com.example.myapplication3.activity.AlarmListener;
+import dbhelper.AlarmDbHelper;
+import listener.AlarmListener;
 
-import java.sql.Time;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import model.Alarm;
 
@@ -88,15 +81,21 @@ import model.Alarm;
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     // update trang thai cua status
+                    //alarm.setStatus(true);
+
                     alarm.setStatus(true);
                     alarmListener.startAlarm(alarm,i);
+
+                    //  alarmDbHelper.updateAlarm(alarm);
                    // alarms.get(i).setStatus(toggle);
 
                 }else{
 
                     alarm.setStatus(false);
                     alarmListener.cancelAlarm(alarm,i);
-                   //alarms.get(i).setStatus(toggle);
+
+                    //alarms.get(i).setStatus(toggle);
+                    //alarmDbHelper.updateAlarm(alarm);
 
                 }
             }

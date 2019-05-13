@@ -1,4 +1,4 @@
-package com.example.myapplication3.activity;
+package lib;
 
 import android.content.Context;
 import android.content.res.Resources;

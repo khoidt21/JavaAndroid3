@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import adapter.AlarmAdapter;
+import dbhelper.AlarmDbHelper;
+import lib.DividerItemDecoration;
+import listener.AlarmListener;
 import model.Alarm;
 import receiver.AlarmReceiver;
 
@@ -135,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         //cap nhat them moi mot alarm
         int index = alarmAdapter.getItemCount();
         alarmAdapter.notifyItemInserted(index);
-        //AlarmDbHelper alarmDbHelper = new AlarmDbHelper();
         alarmDB.addAlarm(alarm);
     }
 

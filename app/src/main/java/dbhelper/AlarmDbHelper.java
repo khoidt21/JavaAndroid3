@@ -1,13 +1,11 @@
-package com.example.myapplication3.activity;
+package dbhelper;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.util.ArrayList;
-
 import model.Alarm;
 
 public class AlarmDbHelper extends SQLiteOpenHelper {
@@ -15,7 +13,6 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "alarmManager";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "alarms";
-
     private static final String KEY_ID = "id";
     private static final String KEY_HOUR = "hour";
     private static final String KEY_MINUTE = "minute";
