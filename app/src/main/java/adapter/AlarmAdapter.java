@@ -101,9 +101,7 @@ import model.Alarm;
                 }
             }
         });
-
     }
-
 
     @Override
     public int getItemCount() {
