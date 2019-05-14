@@ -83,15 +83,6 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         return super.onCreateOptionsMenu(menu);
     }
 
-//    @Override
-//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-//        super.onCreateContextMenu(menu, v, menuInfo);
-//
-//        menu.setHeaderTitle("Select The Action");
-//        menu.add(0, v.getId(), 0, "Call");
-//        menu.add(0, v.getId(), 0, "SMS");
-//    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -99,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
                 Intent myIntent = new Intent(MainActivity.this, AddAlarmActivity.class);
                 MainActivity.this.startActivityForResult(myIntent, REQUEST_ALARM);
                 break;
+            case R.id.menuEdit:
+
+            case R.id.menuDelete:
 
 
             // loi do case nay
@@ -151,9 +145,6 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,requestCode,intent_alarm_receiver,PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),10000,pendingIntent);
 
-        // alarmDB.addAlarm(alarm);
-
-        //alarmDB.updateAlarm(alarm);
     }
 
     @Override
@@ -169,6 +160,17 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
 
         //alarmDB.updateAlarm(alarm);
     }
+    // ham chon menu
+    @Override
 
+    public void onMenuAction(Alarm alarm, MenuItem item, int position) {
+        int id = item.getItemId();
+        if(id == R.id.menuEdit) {
+            alarmDB.updateAlarm(alarm);
+        } else if(id == R.id.menuDelete) {
+            //deleteAlarm(position);
+            System.out.println("Delete");
+        }
+    }
 
 }
