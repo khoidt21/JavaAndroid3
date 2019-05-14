@@ -12,16 +12,16 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".activity.AddAlarmActivity"
+            android:name=".PRM391x_AlarmClock_khoidtFX01411.AddAlarmActivity"
             android:label="@string/title_activity_add_alarm"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".activity.SettingMusicActivity"
+            android:name=".PRM391x_AlarmClock_khoidtFX01411.SettingMusicActivity"
             android:label="SettingMusicActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".PRM391x_AlarmClock_khoidtFX01411.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

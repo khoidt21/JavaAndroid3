@@ -11,7 +11,6 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import com.example.myapplication3.R;
-import com.example.myapplication3.activity.MainActivity;
 
 import dbhelper.AlarmDbHelper;
 import listener.AlarmListener;

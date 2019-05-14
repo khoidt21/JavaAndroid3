@@ -1,12 +1,9 @@
-package com.example.myapplication3.activity;
+package com.example.myapplication3.PRM391x_AlarmClock_khoidtFX01411;
 
-import android.app.Service;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;

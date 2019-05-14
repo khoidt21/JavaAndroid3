@@ -1,4 +1,4 @@
-package com.example.myapplication3.activity;
+package com.example.myapplication3.PRM391x_AlarmClock_khoidtFX01411;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -164,13 +164,13 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
     @Override
 
     public void onMenuAction(Alarm alarm, MenuItem item, int position) {
-        int id = item.getItemId();
-        if(id == R.id.menuEdit) {
-            alarmDB.updateAlarm(alarm);
-        } else if(id == R.id.menuDelete) {
-            //deleteAlarm(position);
-            System.out.println("Delete");
-        }
+//        int id = item.getItemId();
+//        if(id == R.id.menuEdit) {
+//            alarmDB.updateAlarm(alarm);
+//        } else if(id == R.id.menuDelete) {
+//            //deleteAlarm(position);
+//            System.out.println("Delete");
+//        }
     }
 
 }
