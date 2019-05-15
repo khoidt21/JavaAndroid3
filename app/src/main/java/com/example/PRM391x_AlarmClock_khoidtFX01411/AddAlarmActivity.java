@@ -47,7 +47,6 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(action.equals("add")){
-
                     hour = timePicker.getCurrentHour();
                     minute = timePicker.getCurrentMinute();
                     event = editText.getText().toString();
@@ -57,7 +56,6 @@ public class AddAlarmActivity extends AppCompatActivity {
                     intent.putExtra("MINUTE",minute);
                     intent.putExtra("EVENT",event);
                     setResult(1019, intent);
-
                     finish();
                 }else if(action.equals("edit")){
 
@@ -74,8 +72,6 @@ public class AddAlarmActivity extends AppCompatActivity {
                     setResult(1025, intent);
                     finish();
                 }
-
-
             }
         });
     }

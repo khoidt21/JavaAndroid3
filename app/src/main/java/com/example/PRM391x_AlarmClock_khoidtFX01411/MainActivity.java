@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
 
     AlarmDbHelper alarmDB = null;
     Alarm updateAlarm;
+
+    // Alarm deleteAlarm;
+
     int indexOfAlarm;
 
 
@@ -103,28 +106,23 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // add alarm
-        if (requestCode == REQUEST_ALARM) {
+        // xu ly lay du lieu
+        int hour = data.getIntExtra("HOUR",0);
+        int minute = data.getIntExtra("MINUTE",0);
+        String event = data.getStringExtra("EVENT");
+        String am_pm = (hour < 12) ? "AM" : "PM";
 
-                // lay data tu intent
-                int hour = data.getIntExtra("HOUR",0);
-                int minute = data.getIntExtra("MINUTE",0);
-                String event = data.getStringExtra("EVENT");
-                String am_pm = (hour < 12) ? "AM" : "PM";
+        // add
+        if (requestCode == REQUEST_ALARM) {
                 boolean isToggleOnOff = false;
                 // Tao doi tuong alarm moi
                 Alarm alarm = new Alarm(hour,minute,am_pm,event,isToggleOnOff);
                 listAlarm.add(alarm);
                 insertNewAlarm(alarm);
             }
-
         // update alarm
-
-            else if(requestCode == 1025){
-                int hour = data.getIntExtra("HOUR",0);
-                int minute = data.getIntExtra("MINUTE",0);
-                String event = data.getStringExtra("EVENT");
-                String am_pm = (hour < 12) ? "AM" : "PM";
+            else if(requestCode == 1022){
+            System.out.println("update + ===============================");
                 updateAlarm.setHour(hour);
                 updateAlarm.setMinute(minute);
                 updateAlarm.setEvent(event);
@@ -165,19 +163,24 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         Toast.makeText(this, "Alarm stopped!", Toast.LENGTH_SHORT).show();
 
     }
-    // ham xu ly menu update code 15/5
+    // ham xu ly menu edit and delete
     @Override
     public void onMenuAction(MenuItem item, int position) {
         updateAlarm = listAlarm.get(position);
         indexOfAlarm = position;
         switch (item.getItemId()){
-
             case R.id.menuEdit:
                  Intent intent = new Intent(MainActivity.this,AddAlarmActivity.class);
                  intent.putExtra("action","edit");
                  startActivityForResult(intent,1022);
                  break;
+            case R.id.menuDelete:
+                int hour = listAlarm.get(indexOfAlarm).getHour();
+                int minute = listAlarm.get(indexOfAlarm).getMinute();
+                alarmDB.deleteAlarm(hour,minute);
+                listAlarm.remove(indexOfAlarm);
+                alarmAdapter.notifyItemChanged(indexOfAlarm);
+                break;
         }
     }
-
 }
