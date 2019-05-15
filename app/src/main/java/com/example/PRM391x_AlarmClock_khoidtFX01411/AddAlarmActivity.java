@@ -29,25 +29,53 @@ public class AddAlarmActivity extends AppCompatActivity {
 
         initView();
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Alarm");
+
         btnAddAlarm = (Button) findViewById(R.id.btnAddAlarm);
         timePicker = (TimePicker) findViewById(R.id.timePicker);
         editText = (EditText) findViewById(R.id.editEvent);
 
+        Bundle extras = getIntent().getExtras();
+        final String action = extras.getString("action");
+        if(action.equals("add")){
+            getSupportActionBar().setTitle("Add Alarm");
+        }else if(action.equals("edit")){
+            getSupportActionBar().setTitle("Edit Alarm");
+            btnAddAlarm.setText("Edit");
+        }
+
         btnAddAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(action.equals("add")){
 
-                hour = timePicker.getCurrentHour();
-                minute = timePicker.getCurrentMinute();
-                event = editText.getText().toString();
+                    hour = timePicker.getCurrentHour();
+                    minute = timePicker.getCurrentMinute();
+                    event = editText.getText().toString();
 
-                Intent intent = new Intent();
-                intent.putExtra("HOUR",hour);
-                intent.putExtra("MINUTE",minute);
-                intent.putExtra("EVENT",event);
-                setResult(1019, intent);
-                finish();
+                    Intent intent = new Intent();
+                    intent.putExtra("HOUR",hour);
+                    intent.putExtra("MINUTE",minute);
+                    intent.putExtra("EVENT",event);
+                    setResult(1019, intent);
+
+                    finish();
+                }else if(action.equals("edit")){
+
+                   // getSupportActionBar().setTitle("Edit");
+
+                    hour = timePicker.getCurrentHour();
+                    minute = timePicker.getCurrentMinute();
+                    event = editText.getText().toString();
+
+                    Intent intent = new Intent();
+                    intent.putExtra("HOUR",hour);
+                    intent.putExtra("MINUTE",minute);
+                    intent.putExtra("EVENT",event);
+                    setResult(1025, intent);
+                    finish();
+                }
+
+
             }
         });
     }

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.myapplication3"
+        applicationId "com.example.PRM391x_AlarmClock_khoidtFX01411"
         minSdkVersion 28
         targetSdkVersion 28
         versionCode 1

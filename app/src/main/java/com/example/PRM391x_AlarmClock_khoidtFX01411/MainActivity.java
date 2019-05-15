@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
     String title = "Alarm";
 
     AlarmDbHelper alarmDB = null;
+    Alarm updateAlarm;
+    int indexOfAlarm;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,18 +91,10 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         switch (item.getItemId()){
             case R.id.add_alarm :
                 Intent myIntent = new Intent(MainActivity.this, AddAlarmActivity.class);
+                myIntent.putExtra("action","add");
                 MainActivity.this.startActivityForResult(myIntent, REQUEST_ALARM);
                 break;
-            case R.id.menuEdit:
 
-            case R.id.menuDelete:
-
-
-            // loi do case nay
-//            case R.id.add_setting:
-//                Intent settingIntent = new Intent(MainActivity.this, SettingMusicActivity.class);
-//                MainActivity.this.startActivityForResult(settingIntent,REQUEST_ALARM);
-//                break;
 
         }
         return super.onOptionsItemSelected(item);
@@ -108,9 +103,9 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        // add alarm
         if (requestCode == REQUEST_ALARM) {
-            if (resultCode == 1019) {
+
                 // lay data tu intent
                 int hour = data.getIntExtra("HOUR",0);
                 int minute = data.getIntExtra("MINUTE",0);
@@ -122,8 +117,23 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
                 listAlarm.add(alarm);
                 insertNewAlarm(alarm);
             }
+
+        // update alarm
+
+            else if(requestCode == 1025){
+                int hour = data.getIntExtra("HOUR",0);
+                int minute = data.getIntExtra("MINUTE",0);
+                String event = data.getStringExtra("EVENT");
+                String am_pm = (hour < 12) ? "AM" : "PM";
+                updateAlarm.setHour(hour);
+                updateAlarm.setMinute(minute);
+                updateAlarm.setEvent(event);
+                updateAlarm.setAmpm(am_pm);
+                alarmDB.updateAlarm(updateAlarm);
+                alarmAdapter.notifyItemChanged(indexOfAlarm);
+            }
         }
-    }
+
 
     //ham them 1 alar moi
     private void insertNewAlarm(Alarm alarm) {
@@ -153,21 +163,21 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         alarmManager.cancel(pendingIntent);
         sendBroadcast(intent_alarm_receiver);
         Toast.makeText(this, "Alarm stopped!", Toast.LENGTH_SHORT).show();
-       // alarmDB.addAlarm(alarm);
 
-
-        //alarmDB.updateAlarm(alarm);
     }
     // ham xu ly menu update code 15/5
     @Override
-    public void onMenuAction(Alarm alarm, MenuItem item, int position) {
-//        int id = item.getItemId();
-//        if(id == R.id.menuEdit) {
-//            alarmDB.updateAlarm(alarm);
-//        } else if(id == R.id.menuDelete) {
-//            //deleteAlarm(position);
-//            System.out.println("Delete");
-//        }
+    public void onMenuAction(MenuItem item, int position) {
+        updateAlarm = listAlarm.get(position);
+        indexOfAlarm = position;
+        switch (item.getItemId()){
+
+            case R.id.menuEdit:
+                 Intent intent = new Intent(MainActivity.this,AddAlarmActivity.class);
+                 intent.putExtra("action","edit");
+                 startActivityForResult(intent,1022);
+                 break;
+        }
     }
 
 }

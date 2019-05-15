@@ -106,5 +106,12 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         db.update(TABLE_NAME,values,"hour=? AND minute=?",args);
         db.close();
     }
+    public void deleteAlarm(Alarm alarm){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] args = new String[]{String.valueOf(alarm.getHour()) , String.valueOf(alarm.getMinute())};
+        db.delete(TABLE_NAME,"hour=? AND minute=?",args);
+        db.close();
+    }
 
 }
