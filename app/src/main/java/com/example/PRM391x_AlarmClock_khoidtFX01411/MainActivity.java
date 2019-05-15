@@ -158,9 +158,8 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
 
         //alarmDB.updateAlarm(alarm);
     }
-    // ham chon menu
+    // ham xu ly menu update code 15/5
     @Override
-
     public void onMenuAction(Alarm alarm, MenuItem item, int position) {
 //        int id = item.getItemId();
 //        if(id == R.id.menuEdit) {
