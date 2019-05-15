@@ -122,9 +122,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
                 listAlarm.add(alarm);
                 insertNewAlarm(alarm);
             }
-
         }
-
     }
 
     //ham them 1 alar moi
