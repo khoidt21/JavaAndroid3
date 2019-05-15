@@ -20,10 +20,6 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
     private static final String KEY_EVENT = "event";
     private static final String KEY_STATUS = "status";
 
-
-    // private static final String KEY_SONG = "idsong";
-
-
     public AlarmDbHelper(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }
@@ -41,6 +37,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         db.execSQL(drop_alarms_table);
         onCreate(db);
     }
+    // ham add Alarm
     public void addAlarm(Alarm alarm){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -56,6 +53,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         db.insert(TABLE_NAME,null,values);
         db.close();
     }
+    // ham get All Alarm
     public ArrayList<Alarm> getAlarms(){
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -77,7 +75,6 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
 
                // boolean alarm luc dau bang false
                int status = cursor.getInt(5 );
-
                alarm.setHour(hour);
                alarm.setMinute(minute);
                alarm.setAmpm(ampm);
@@ -92,7 +89,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         }
         return alarmList;
     }
-
+    // ham update Alarm
     public void updateAlarm(Alarm alarm){
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues values = new ContentValues();
@@ -106,6 +103,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         db.update(TABLE_NAME,values,"hour=? AND minute=?",args);
         db.close();
     }
+
     public void deleteAlarm(int hour,int minute){
         SQLiteDatabase db = this.getReadableDatabase();
 

@@ -175,12 +175,26 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
                  startActivityForResult(intent,1022);
                  break;
             case R.id.menuDelete:
-                int hour = listAlarm.get(indexOfAlarm).getHour();
-                int minute = listAlarm.get(indexOfAlarm).getMinute();
-                alarmDB.deleteAlarm(hour,minute);
-                listAlarm.remove(indexOfAlarm);
-                alarmAdapter.notifyItemChanged(indexOfAlarm);
-                break;
+                 int hour = listAlarm.get(indexOfAlarm).getHour();
+                 int minute = listAlarm.get(indexOfAlarm).getMinute();
+                 alarmDB.deleteAlarm(hour,minute);
+                 if (indexOfAlarm == listAlarm.size() - 1) {
+                    listAlarm.remove(indexOfAlarm);
+                    alarmAdapter.notifyItemRemoved(indexOfAlarm);
+                 } else {
+                    int shift=1;
+                    while (true) {
+                        try {
+                            listAlarm.remove(indexOfAlarm);
+                            alarmAdapter.notifyItemRemoved(indexOfAlarm);
+                            break;
+                        } catch (IndexOutOfBoundsException e) {
+                            shift++;
+                        }
+                    }
+                 }
+
+                 break;
         }
     }
 }

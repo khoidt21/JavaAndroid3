@@ -50,7 +50,6 @@ public class AddAlarmActivity extends AppCompatActivity {
                     hour = timePicker.getCurrentHour();
                     minute = timePicker.getCurrentMinute();
                     event = editText.getText().toString();
-
                     Intent intent = new Intent();
                     intent.putExtra("HOUR",hour);
                     intent.putExtra("MINUTE",minute);
@@ -59,12 +58,9 @@ public class AddAlarmActivity extends AppCompatActivity {
                     finish();
                 }else if(action.equals("edit")){
 
-                   // getSupportActionBar().setTitle("Edit");
-
                     hour = timePicker.getCurrentHour();
                     minute = timePicker.getCurrentMinute();
                     event = editText.getText().toString();
-
                     Intent intent = new Intent();
                     intent.putExtra("HOUR",hour);
                     intent.putExtra("MINUTE",minute);

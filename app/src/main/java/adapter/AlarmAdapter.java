@@ -14,13 +14,10 @@ import android.widget.CompoundButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
 import com.example.PRM391x_AlarmClock_khoidtFX01411.AddAlarmActivity;
 import com.example.PRM391x_AlarmClock_khoidtFX01411.R;
-
 import dbhelper.AlarmDbHelper;
 import listener.AlarmListener;
-
 import java.util.List;
 import model.Alarm;
 
@@ -56,8 +53,6 @@ import model.Alarm;
             final ToggleButton toggleButton = viewHoder.itemView.findViewById(R.id.tglAlarm);
 
             final Alarm alarm = alarms.get(i);
-
-            //System.out.println("================== alarms"+ alarms.size());
 
             int hour = alarms.get(i).getHour();
             int minute = alarms.get(i).getMinute();

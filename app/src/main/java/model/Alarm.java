@@ -25,72 +25,39 @@ public class Alarm implements Serializable {
         this.ampm = ampm;
         this.event = event;
         this.toggleOnOff = toggleOnOff;
-
-        //this.status = status;
-
-      //  this.idsong = idsong;
     }
 
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
-//    public boolean isStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(boolean status) {
-//        this.status = status;
-//    }
-
     public String getAmpm() {
         return ampm;
     }
-
     public void setAmpm(String ampm) {
         this.ampm = ampm;
     }
 
-
-
-//    public int getIdsong() {
-//        return idsong;
-//    }
-//
-//    public void setIdsong(int idsong) {
-//        this.idsong = idsong;
-//    }
-
-
-
     public int getHour() {
         return hour;
     }
-
     public void setHour(int hour) {
         this.hour = hour;
     }
-
     public int getMinute() {
         return minute;
     }
-
     public void setMinute(int minute) {
         this.minute = minute;
     }
-
     public String getEvent() {
         return event;
     }
-
     public void setEvent(String event) {
         this.event = event;
     }
-
     public boolean isToggleOnOff() {
         return toggleOnOff;
     }
