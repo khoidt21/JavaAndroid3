@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.myapplication3">
+    package="com.example.PRM391x_AlarmClock_khoidtFX01411">
 
     <application
         android:allowBackup="true"
@@ -12,16 +12,16 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".PRM391x_AlarmClock_khoidtFX01411.AddAlarmActivity"
+            android:name="com.example.PRM391x_AlarmClock_khoidtFX01411.AddAlarmActivity"
             android:label="@string/title_activity_add_alarm"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".PRM391x_AlarmClock_khoidtFX01411.SettingMusicActivity"
+            android:name="com.example.PRM391x_AlarmClock_khoidtFX01411.SettingMusicActivity"
             android:label="SettingMusicActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".PRM391x_AlarmClock_khoidtFX01411.MainActivity">
+        <activity android:name="com.example.PRM391x_AlarmClock_khoidtFX01411.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

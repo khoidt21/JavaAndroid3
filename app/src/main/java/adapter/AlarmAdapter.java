@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-import com.example.myapplication3.R;
+import com.example.PRM391x_AlarmClock_khoidtFX01411.R;
 
 import dbhelper.AlarmDbHelper;
 import listener.AlarmListener;

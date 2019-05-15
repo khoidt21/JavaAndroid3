@@ -1,4 +1,4 @@
-package com.example.myapplication3;
+package com.example.PRM391x_AlarmClock_khoidtFX01411;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.myapplication3.R;
+import com.example.PRM391x_AlarmClock_khoidtFX01411.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;

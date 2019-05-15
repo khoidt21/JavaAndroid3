@@ -1,13 +1,10 @@
 package service;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.os.IBinder;
-import com.example.myapplication3.R;
-import android.content.Intent;
+import com.example.PRM391x_AlarmClock_khoidtFX01411.R;
 
 public class AlarmService extends Service {
 

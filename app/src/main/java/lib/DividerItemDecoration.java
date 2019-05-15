@@ -1,12 +1,11 @@
 package lib;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import com.example.myapplication3.R;
+import com.example.PRM391x_AlarmClock_khoidtFX01411.R;
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration{
     private Drawable mDivider;

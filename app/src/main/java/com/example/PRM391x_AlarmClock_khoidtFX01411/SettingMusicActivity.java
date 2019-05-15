@@ -1,4 +1,4 @@
-package com.example.myapplication3;
+package com.example.PRM391x_AlarmClock_khoidtFX01411;
 
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication3.R;
+import com.example.PRM391x_AlarmClock_khoidtFX01411.R;
 
 public class SettingMusicActivity extends AppCompatActivity {
 
