@@ -58,12 +58,9 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         initView();
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(title);
-
         alarmDB = new AlarmDbHelper(getApplicationContext());;
-
         listAlarm = alarmDB.getAlarms();
         setAlarmToAdapter();
-
     }
 
     public void initView(){
@@ -112,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         String event = data.getStringExtra("EVENT");
         String am_pm = (hour < 12) ? "AM" : "PM";
 
-        // add
+        // add alarm
         if (requestCode == REQUEST_ALARM) {
                 boolean isToggleOnOff = false;
                 // Tao doi tuong alarm moi
@@ -122,7 +119,6 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
             }
         // update alarm
             else if(requestCode == 1022){
-            System.out.println("update + ===============================");
                 updateAlarm.setHour(hour);
                 updateAlarm.setMinute(minute);
                 updateAlarm.setEvent(event);

@@ -1,4 +1,6 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="textSize">10sp</dimen>
+    <dimen name="textSizeAdd">25sp</dimen>
+    <dimen name="paddingRecycler">8dp</dimen>
 </resources>

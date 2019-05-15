@@ -25,6 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="ADD"
-        android:textSize="25sp" />
+        android:textSize="@dimen/textSizeAdd" />
 
 </LinearLayout>

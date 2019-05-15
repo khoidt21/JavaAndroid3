@@ -21,7 +21,7 @@ import listener.AlarmListener;
 import java.util.List;
 import model.Alarm;
 
-    public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHoder>  {
+    public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder>  {
 
     List<Alarm> alarms;
     AlarmListener alarmListener;
@@ -39,18 +39,18 @@ import model.Alarm;
 
     @NonNull
     @Override
-    public ViewHoder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View view = inflater.inflate(R.layout.alarm_item, viewGroup, false);
-        return new ViewHoder(view);
+        return new ViewHolder(view);
     }
 
         @Override
-        public void onBindViewHolder(@NonNull ViewHoder viewHoder, final int i) {
-            TextView hourShow = viewHoder.itemView.findViewById(R.id.txtHour);
-            TextView amPm = viewHoder.itemView.findViewById(R.id.txtAmPm);
-            TextView event = viewHoder.itemView.findViewById(R.id.txtEvent);
-            final ToggleButton toggleButton = viewHoder.itemView.findViewById(R.id.tglAlarm);
+        public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+            TextView hourShow = viewHolder.itemView.findViewById(R.id.txtHour);
+            TextView amPm = viewHolder.itemView.findViewById(R.id.txtAmPm);
+            TextView event = viewHolder.itemView.findViewById(R.id.txtEvent);
+            final ToggleButton toggleButton = viewHolder.itemView.findViewById(R.id.tglAlarm);
 
             final Alarm alarm = alarms.get(i);
 
@@ -99,13 +99,12 @@ import model.Alarm;
         }
 
 
-    public class ViewHoder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, PopupMenu.OnMenuItemClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, PopupMenu.OnMenuItemClickListener {
 
-        public ViewHoder(View view){
+        public ViewHolder(View view){
              super(view);
              view.setOnCreateContextMenuListener(this);
         }
-
 
         @Override
         public boolean onMenuItemClick(MenuItem item) {
