@@ -1,4 +1,4 @@
-package com.example.myapplication3.PRM391x_AlarmClock_khoidtFX01411;
+package com.example.myapplication3;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

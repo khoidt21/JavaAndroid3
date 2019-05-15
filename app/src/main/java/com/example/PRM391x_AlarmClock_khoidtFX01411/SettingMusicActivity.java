@@ -1,4 +1,4 @@
-package com.example.myapplication3.PRM391x_AlarmClock_khoidtFX01411;
+package com.example.myapplication3;
 
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
