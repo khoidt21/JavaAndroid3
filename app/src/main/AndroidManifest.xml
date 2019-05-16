@@ -16,11 +16,6 @@
             android:label="@string/title_activity_add_alarm"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity
-            android:name="com.example.PRM391x_AlarmClock_khoidtFX01411.SettingMusicActivity"
-            android:label="SettingMusicActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
         <activity android:name="com.example.PRM391x_AlarmClock_khoidtFX01411.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

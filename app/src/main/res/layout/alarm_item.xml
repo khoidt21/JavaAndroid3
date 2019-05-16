@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:weightSum="5">
+    android:weightSum="@dimen/linearlayoutWeightSum">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/linearlayoutHeight"
-        android:layout_weight="2"
+        android:layout_weight="@dimen/linearlayoutWeight"
         android:orientation="vertical">
 
         <TextView
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/linearlayoutHeight"
         android:layout_gravity="top|center_vertical"
-        android:layout_weight="1"
+        android:layout_weight="@dimen/weightLinearLayout"
         android:orientation="vertical">
 
         <TextView
@@ -52,7 +52,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/linearlayoutHeight"
-        android:layout_weight="2"
+        android:layout_weight="@dimen/linearlayoutWeight"
         android:orientation="vertical">
 
         <ToggleButton
