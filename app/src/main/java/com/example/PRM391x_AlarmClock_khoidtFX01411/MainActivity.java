@@ -130,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
                      int hourOld = data.getIntExtra("hourOld",0);
                      int minuteOld = data.getIntExtra("minuteOld",0);
 
+                     System.out.println("====================== hour old" +hourOld);
+
                      updateAlarm.setHour(hour);
                      updateAlarm.setMinute(minute);
                      updateAlarm.setEvent(event);
@@ -182,13 +184,13 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
             case R.id.menuEdit:
                  Intent intent = new Intent(MainActivity.this,AddAlarmActivity.class);
 
-                 //hourOld = listAlarm.get(indexOfAlarm).getHour();
-                 //minuteOld = listAlarm.get(indexOfAlarm).getMinute();
+                 hourOld = listAlarm.get(indexOfAlarm).getHour();
+                 minuteOld = listAlarm.get(indexOfAlarm).getMinute();
 
                 intent.putExtra("action","edit");
 
-                 //intent.putExtra("hourOld",hourOld);
-                 //intent.putExtra("minuteOld",minuteOld);
+                 intent.putExtra("hourOld",hourOld);
+                 intent.putExtra("minuteOld",minuteOld);
 
                 startActivityForResult(intent,1022);
                  break;
