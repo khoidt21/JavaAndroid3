@@ -119,12 +119,16 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
             }
         // update alarm
             else if(requestCode == 1022){
-                updateAlarm.setHour(hour);
-                updateAlarm.setMinute(minute);
-                updateAlarm.setEvent(event);
-                updateAlarm.setAmpm(am_pm);
-                alarmDB.updateAlarm(updateAlarm);
-                alarmAdapter.notifyItemChanged(indexOfAlarm);
+                 if(resultCode == 1021) {
+                     updateAlarm.setHour(hour);
+                     updateAlarm.setMinute(minute);
+                     updateAlarm.setEvent(event);
+
+                     //updateAlarm.setAmpm(am_pm);
+
+                     alarmDB.updateAlarm(updateAlarm);
+                     alarmAdapter.notifyItemChanged(indexOfAlarm);
+                 }
             }
         }
 

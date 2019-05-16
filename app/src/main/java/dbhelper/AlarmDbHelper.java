@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+
 import java.util.ArrayList;
 import model.Alarm;
 
@@ -95,10 +97,11 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_HOUR,alarm.getHour());
         values.put(KEY_MINUTE,alarm.getMinute());
-        values.put(KEY_AM_PM,alarm.getAmpm());
+
+       // values.put(KEY_AM_PM,alarm.getAmpm());
+
         values.put(KEY_EVENT,alarm.getEvent());
         values.put(KEY_STATUS, (alarm.isToggleOnOff() ? 1 : 0));
-
         String[] args = new String[]{String.valueOf(alarm.getHour()) , String.valueOf(alarm.getMinute())};
         db.update(TABLE_NAME,values,"hour=? AND minute=?",args);
         db.close();

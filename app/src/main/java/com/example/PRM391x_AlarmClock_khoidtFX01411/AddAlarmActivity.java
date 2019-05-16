@@ -65,7 +65,7 @@ public class AddAlarmActivity extends AppCompatActivity {
                     intent.putExtra("HOUR",hour);
                     intent.putExtra("MINUTE",minute);
                     intent.putExtra("EVENT",event);
-                    setResult(1025, intent);
+                    setResult(1021, intent);
                     finish();
                 }
             }

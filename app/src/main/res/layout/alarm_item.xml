@@ -4,20 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:weightSum="@dimen/linearlayoutWeightSum">
+    android:weightSum="5">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/linearlayoutHeight"
-        android:layout_weight="@dimen/linearlayoutWeight"
+        android:layout_height="60dp"
+        android:layout_weight="2"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtHour"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/heigthTextHour"
+            android:layout_height="40dp"
             android:layout_gravity="start|center_horizontal"
             android:gravity="bottom|start"
-            android:textSize="@dimen/textViewSize" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/txtEvent"
@@ -28,30 +29,30 @@
         <TextView
             android:id="@+id/txtMinute"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/heightTextMinute"
+            android:layout_height="20dp"
             android:layout_gravity="start"
-            android:textSize="@dimen/textSizeMinute"
+            android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/linearlayoutHeight"
+        android:layout_height="60dp"
         android:layout_gravity="top|center_vertical"
-        android:layout_weight="@dimen/weightLinearLayout"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtAmPm"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/heigthTextAMPM"
+            android:layout_height="40dp"
             android:gravity="bottom|start"
-            android:textSize="@dimen/sizeTextAmpm"
+            android:textSize="15sp"
             />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/linearlayoutHeight"
-        android:layout_weight="@dimen/weightLinearLayout"
+        android:layout_height="60dp"
+        android:layout_weight="2"
         android:orientation="vertical">
 
         <ToggleButton
@@ -59,8 +60,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
-            android:text="@string/togglebutton"
-            android:textSize="@dimen/textSizeToggleButton" />
+            android:text="ToggleButton"
+            android:textSize="25sp" />
     </LinearLayout>
 
 </LinearLayout>
