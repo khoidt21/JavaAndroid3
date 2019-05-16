@@ -43,7 +43,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
     public void addAlarm(Alarm alarm){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_ID,alarm.getId());
+     //   values.put(KEY_ID,alarm.getId());
         values.put(KEY_HOUR,alarm.getHour());
         values.put(KEY_MINUTE,alarm.getMinute());
         values.put(KEY_AM_PM,alarm.getAmpm());

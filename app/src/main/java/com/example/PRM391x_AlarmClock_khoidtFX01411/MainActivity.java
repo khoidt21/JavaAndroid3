@@ -175,10 +175,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
 
                  hourOld = listAlarm.get(indexOfAlarm).getHour();
                  minuteOld = listAlarm.get(indexOfAlarm).getMinute();
-
                  intent.putExtra("action","edit");
-
-
                  startActivityForResult(intent,1022);
                  break;
 
@@ -189,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
                  if (indexOfAlarm == listAlarm.size() - 1) {
                     listAlarm.remove(indexOfAlarm);
                     alarmAdapter.notifyItemRemoved(indexOfAlarm);
+                    cancelAlarm(listAlarm.get(indexOfAlarm - 1),indexOfAlarm);
                  } else {
                     int shift = 1;
                     while (true) {
@@ -201,8 +199,6 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
                         }
                     }
                  }
-
-
                  break;
         }
     }
