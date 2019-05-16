@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         // khoi tao alarmManager
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
     }
-    // ham set alarm vao adapter 
+    // ham set alarm vao adapter
     public void setAlarmToAdapter(){
 
         alarmAdapter = new AlarmAdapter(this, listAlarm, this);
@@ -102,11 +102,12 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // lay gia tri du lieu moi tu man hinh add hoac edit
+            try{
+            int hour = data.getIntExtra("HOUR", 0);
+            int minute = data.getIntExtra("MINUTE", 0);
+            String event = data.getStringExtra("EVENT");
+            String am_pm = (hour < 12) ? "AM" : "PM";
 
-        int hour = data.getIntExtra("HOUR",0);
-        int minute = data.getIntExtra("MINUTE",0);
-        String event = data.getStringExtra("EVENT");
-        String am_pm = (hour < 12) ? "AM" : "PM";
 
         // add alarm
         if (requestCode == REQUEST_ALARM) {
@@ -126,6 +127,9 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
                      alarmDB.updateAlarm(updateAlarm, hourOld, minuteOld);
                      alarmAdapter.notifyItemChanged(indexOfAlarm);
                  }
+            }
+            }catch (Exception ex){
+                System.out.println(ex.getMessage());
             }
         }
 
@@ -186,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
                     listAlarm.remove(indexOfAlarm);
                     alarmAdapter.notifyItemRemoved(indexOfAlarm);
                  } else {
-                    int shift=1;
+                    int shift = 1;
                     while (true) {
                         try {
                             listAlarm.remove(indexOfAlarm);

@@ -50,8 +50,6 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         values.put(KEY_EVENT,alarm.getEvent());
         values.put(KEY_STATUS,(alarm.isToggleOnOff() ? 1 : 0));
 
-        // values.put(KEY_SONG,alarm.getIdsong());
-
         db.insert(TABLE_NAME,null,values);
         db.close();
     }
@@ -98,39 +96,13 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_HOUR,alarm.getHour());
         values.put(KEY_MINUTE,alarm.getMinute());
-
-       // values.put(KEY_AM_PM,alarm.getAmpm());
-
         values.put(KEY_EVENT,alarm.getEvent());
         values.put(KEY_STATUS, (alarm.isToggleOnOff() ? 1 : 0));
 
         String[] args = new String[]{String.valueOf(hourOld) , String.valueOf(minutesOld)};
         db.update(TABLE_NAME,values,"hour=? AND minute=?",args);
-
-       // db.Commit();
-        //db.setTransactionSuccussful();
-
         db.close();
     }
-//    public void updateOneAlarm(Alarm alarmNew,Alarm alarmOld){
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(KEY_HOUR,alarmNew.getHour());
-//        values.put(KEY_MINUTE,alarmNew.getMinute());
-//
-//        // values.put(KEY_AM_PM,alarm.getAmpm());
-//
-//        values.put(KEY_EVENT,alarmNew.getEvent());
-//        values.put(KEY_STATUS, (alarmNew.isToggleOnOff() ? 1 : 0));
-//
-//        String[] args = new String[]{String.valueOf(alarmOld.getHour()) , String.valueOf(alarmOld.getMinute())};
-//        db.update(TABLE_NAME,values,"hour=? AND minute=?",args);
-//
-//        // db.Commit();
-//        //db.setTransactionSuccussful();
-//
-//        db.close();
-//    }
     // ham xoa alarm
     public void deleteAlarm(int hour,int minute){
         SQLiteDatabase db = this.getReadableDatabase();

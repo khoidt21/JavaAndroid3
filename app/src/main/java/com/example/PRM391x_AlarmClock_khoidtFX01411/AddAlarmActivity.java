@@ -33,7 +33,6 @@ public class AddAlarmActivity extends AppCompatActivity {
         btnAddAlarm = (Button) findViewById(R.id.btnAddAlarm);
         timePicker = (TimePicker) findViewById(R.id.timePicker);
         editText = (EditText) findViewById(R.id.editEvent);
-
         Bundle extras = getIntent().getExtras();
         final String action = extras.getString("action");
         if(action.equals("add")){
@@ -46,25 +45,35 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(action.equals("add")){
-                    hour = timePicker.getCurrentHour();
-                    minute = timePicker.getCurrentMinute();
-                    event = editText.getText().toString();
-                    Intent intent = new Intent();
-                    intent.putExtra("HOUR",hour);
-                    intent.putExtra("MINUTE",minute);
-                    intent.putExtra("EVENT",event);
-                    setResult(1019, intent);
-                    finish();
+                    try {
+
+                        hour = timePicker.getCurrentHour();
+                        minute = timePicker.getCurrentMinute();
+                        event = editText.getText().toString();
+                        Intent intent = new Intent();
+                        intent.putExtra("HOUR",hour);
+                        intent.putExtra("MINUTE",minute);
+                        intent.putExtra("EVENT",event);
+                        setResult(1019, intent);
+                        finish();
+
+                    }catch (Exception ex){
+                        System.out.println(ex.getMessage());
+                    }
                 }else if(action.equals("edit")){
-                    hour = timePicker.getCurrentHour();
-                    minute = timePicker.getCurrentMinute();
-                    event = editText.getText().toString();
-                    Intent intent = new Intent();
-                    intent.putExtra("HOUR",hour);
-                    intent.putExtra("MINUTE",minute);
-                    intent.putExtra("EVENT",event);
-                    setResult(1021, intent);
-                    finish();
+                    try{
+                        hour = timePicker.getCurrentHour();
+                        minute = timePicker.getCurrentMinute();
+                        event = editText.getText().toString();
+                        Intent intent = new Intent();
+                        intent.putExtra("HOUR",hour);
+                        intent.putExtra("MINUTE",minute);
+                        intent.putExtra("EVENT",event);
+                        setResult(1021, intent);
+                        finish();
+                    }catch (Exception ex){
+                        System.out.println(ex.getMessage());
+                    }
                 }
             }
         });
