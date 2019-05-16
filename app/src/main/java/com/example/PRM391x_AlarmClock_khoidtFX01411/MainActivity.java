@@ -44,6 +44,11 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
     AlarmDbHelper alarmDB = null;
     Alarm updateAlarm;
 
+    //Alarm alarmOrigin;
+
+    int hourOld;
+    int minuteOld;
+
     // Alarm deleteAlarm;
 
     int indexOfAlarm;
@@ -120,6 +125,11 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         // update alarm
             else if(requestCode == 1022){
                  if(resultCode == 1021) {
+                    // hour = listAlarm.get(i).getHour();
+
+                     int hourOld = data.getIntExtra("hourOld",0);
+                     int minuteOld = data.getIntExtra("minuteOld",0);
+
                      updateAlarm.setHour(hour);
                      updateAlarm.setMinute(minute);
                      updateAlarm.setEvent(event);
@@ -171,9 +181,18 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         switch (item.getItemId()){
             case R.id.menuEdit:
                  Intent intent = new Intent(MainActivity.this,AddAlarmActivity.class);
-                 intent.putExtra("action","edit");
-                 startActivityForResult(intent,1022);
+
+                 //hourOld = listAlarm.get(indexOfAlarm).getHour();
+                 //minuteOld = listAlarm.get(indexOfAlarm).getMinute();
+
+                intent.putExtra("action","edit");
+
+                 //intent.putExtra("hourOld",hourOld);
+                 //intent.putExtra("minuteOld",minuteOld);
+
+                startActivityForResult(intent,1022);
                  break;
+
             case R.id.menuDelete:
                  int hour = listAlarm.get(indexOfAlarm).getHour();
                  int minute = listAlarm.get(indexOfAlarm).getMinute();

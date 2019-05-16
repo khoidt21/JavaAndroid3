@@ -54,8 +54,8 @@ import model.Alarm;
 
             final Alarm alarm = alarms.get(i);
 
-            int hour = alarms.get(i).getHour();
-            int minute = alarms.get(i).getMinute();
+            final int hour = alarms.get(i).getHour();
+            final int minute = alarms.get(i).getMinute();
             String eventAlarm = alarms.get(i).getEvent();
 
             if(alarms.get(i).getMinute() < 10){
@@ -77,6 +77,7 @@ import model.Alarm;
             else if(toggle == true) {
                 toggleButton.setChecked(true);
             }
+            // update trang thai button
             toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

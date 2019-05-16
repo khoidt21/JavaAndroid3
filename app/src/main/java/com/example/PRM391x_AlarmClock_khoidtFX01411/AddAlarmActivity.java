@@ -42,7 +42,6 @@ public class AddAlarmActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("Edit Alarm");
             btnAddAlarm.setText("Edit");
         }
-
         btnAddAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +56,6 @@ public class AddAlarmActivity extends AppCompatActivity {
                     setResult(1019, intent);
                     finish();
                 }else if(action.equals("edit")){
-
                     hour = timePicker.getCurrentHour();
                     minute = timePicker.getCurrentMinute();
                     event = editText.getText().toString();

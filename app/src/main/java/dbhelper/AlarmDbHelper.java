@@ -93,6 +93,7 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
     }
     // ham update Alarm
     public void updateAlarm(Alarm alarm){
+
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_HOUR,alarm.getHour());
@@ -102,9 +103,15 @@ public class AlarmDbHelper extends SQLiteOpenHelper {
 
         values.put(KEY_EVENT,alarm.getEvent());
         values.put(KEY_STATUS, (alarm.isToggleOnOff() ? 1 : 0));
+
         String[] args = new String[]{String.valueOf(alarm.getHour()) , String.valueOf(alarm.getMinute())};
         db.update(TABLE_NAME,values,"hour=? AND minute=?",args);
+
+       // db.Commit();
+        //db.setTransactionSuccussful();
+
         db.close();
+
     }
     // ham xoa alarm
     public void deleteAlarm(int hour,int minute){
