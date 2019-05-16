@@ -86,13 +86,13 @@ import model.Alarm;
                         alarm.setToggleOnOff(true);
                         alarmDbHelper = new AlarmDbHelper(context);
                         alarmListener.startAlarm(alarm,i);
-                        alarmDbHelper.updateAlarm(alarm);
+                        alarmDbHelper.updateAlarm(alarm,hour,minute);
                     }else{
 
                         alarm.setToggleOnOff(false);
                         alarmListener.cancelAlarm(alarm,i);
                         alarmDbHelper = new AlarmDbHelper(context);
-                        alarmDbHelper.updateAlarm(alarm);
+                        alarmDbHelper.updateAlarm(alarm,hour,minute);
 
                     }
                 }
