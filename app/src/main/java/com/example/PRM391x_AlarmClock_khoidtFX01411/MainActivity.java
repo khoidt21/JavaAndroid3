@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
         Intent intent_alarm_receiver = new Intent(MainActivity.this, AlarmReceiver.class);
         intent_alarm_receiver.putExtra("music_flag",true);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,requestCode,intent_alarm_receiver,PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),10000,pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),1000 * 60 *10,pendingIntent);
 
     }
 

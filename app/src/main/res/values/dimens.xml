@@ -15,4 +15,5 @@
     <dimen name="weightLinearLayout">1</dimen>
     <dimen name="heigthTextAMPM">40dp</dimen>
     <dimen name="sizeTextAmpm">15sp</dimen>
+    <dimen name="titleMarginStart">155dp</dimen>
 </resources>

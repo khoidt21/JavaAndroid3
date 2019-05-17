@@ -7,7 +7,7 @@
     android:minHeight="?attr/actionBarSize"
     android:theme="?attr/actionBarTheme"
     app:title="Title"
-    app:titleMarginStart="155dp"
+    app:titleMarginStart="@dimen/titleMarginStart"
     app:titleTextColor="@android:color/white"
     >
 </android.support.v7.widget.Toolbar>
