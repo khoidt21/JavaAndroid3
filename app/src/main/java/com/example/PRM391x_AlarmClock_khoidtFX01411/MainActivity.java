@@ -106,14 +106,14 @@ public class MainActivity extends AppCompatActivity implements AlarmListener, Vi
             int hour = data.getIntExtra("HOUR", 0);
             int minute = data.getIntExtra("MINUTE", 0);
             String event = data.getStringExtra("EVENT");
-            String am_pm = (hour < 12) ? "AM" : "PM";
+
 
 
         // add alarm
         if (requestCode == REQUEST_ALARM) {
                 boolean isToggleOnOff = false;
                 // Tao doi tuong alarm moi
-                Alarm alarm = new Alarm(hour,minute,am_pm,event,isToggleOnOff);
+                Alarm alarm = new Alarm(hour,minute,event,isToggleOnOff);
                 listAlarm.add(alarm);
                 insertNewAlarm(alarm);
             }

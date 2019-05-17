@@ -19,7 +19,6 @@ public class AddAlarmActivity extends AppCompatActivity {
     int minute;
     Toolbar toolbar;
     EditText editText;
-
     boolean buttonToggleBoolean = false;
 
     @Override
@@ -36,9 +35,9 @@ public class AddAlarmActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         final String action = extras.getString("action");
         if(action.equals("add")){
-            getSupportActionBar().setTitle("Add Alarm");
+            getSupportActionBar().setTitle(R.string.addAlarm);
         }else if(action.equals("edit")){
-            getSupportActionBar().setTitle("Edit Alarm");
+            getSupportActionBar().setTitle(R.string.editAlarm);
             btnAddAlarm.setText("Edit");
         }
         btnAddAlarm.setOnClickListener(new View.OnClickListener() {

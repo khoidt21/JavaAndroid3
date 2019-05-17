@@ -64,8 +64,9 @@ import model.Alarm;
             else {
                 hourShow.setText(hour + ":" + minute);
             }
+            String am_pm = (hour < 12) ? "AM" : "PM";
 
-            amPm.setText(alarms.get(i).getAmpm());
+            amPm.setText(am_pm);
             event.setText(alarms.get(i).getEvent());
 
             final boolean toggle = alarms.get(i).isToggleOnOff();
